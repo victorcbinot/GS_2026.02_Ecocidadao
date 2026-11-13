@@ -1,0 +1,151 @@
+{
+  "municipio": "EcoCidade",
+  "fonte": {
+    "lista": "Lista de Ecopontos de EcoCidade",
+    "publicada_em": "2026-02-01",
+    "comunicado": "Comunicado de Interdição do Ecoponto Parque das Acácias",
+    "comunicado_publicado_em": "2026-03-10"
+  },
+  "observacoes": [
+    "Cada domicílio pode entregar até 1 metro cúbico ou 50 quilogramas de recicláveis por dia.",
+    "Resíduos de construção são limitados a 2 metros cúbicos por mês e somente no Ecoponto Industrial.",
+    "Volumosos são limitados a dois volumes por mês e somente no Ecoponto Industrial.",
+    "Óleo de cozinha usado deve ser entregue em garrafa PET lacrada, com no máximo 2 litros por entrega, exclusivamente no Ecoponto Vila Verde.",
+    "Medicamentos vencidos não são aceitos em nenhum Ecoponto. A destinação correta é a Farmácia Municipal EcoSaúde, Rua das Palmeiras, 77, Centro, de segunda a sexta-feira, das 08:00 às 17:00."
+  ],
+  "ecopontos": [
+    {
+      "id": "centro",
+      "nome": "Centro",
+      "endereco": "Rua das Bromélias, 120, Centro",
+      "horario": "segunda a sexta, 08:00 às 17:00; sábado, 08:00 às 12:00",
+      "materiais_aceitos": [
+        "papel",
+        "papelão",
+        "vidro",
+        "plástico",
+        "metal"
+      ],
+      "materiais_nao_aceitos": [
+        "eletrônicos",
+        "pilhas",
+        "baterias",
+        "óleo de cozinha",
+        "entulho",
+        "volumosos",
+        "pneus",
+        "lâmpadas fluorescentes",
+        "medicamentos"
+      ],
+      "situacao": "em funcionamento"
+    },
+    {
+      "id": "parque_das_acacias",
+      "nome": "Parque das Acácias",
+      "endereco": "Avenida das Acácias, 850, Jardim das Acácias",
+      "horario": "segunda a sábado, 07:00 às 19:00",
+      "materiais_aceitos": [
+        "papel",
+        "papelão",
+        "vidro",
+        "plástico",
+        "metal",
+        "eletrônicos",
+        "pilhas",
+        "baterias"
+      ],
+      "materiais_nao_aceitos": [
+        "óleo de cozinha",
+        "entulho",
+        "volumosos",
+        "pneus",
+        "lâmpadas fluorescentes",
+        "medicamentos"
+      ],
+      "situacao": "em funcionamento"
+    },
+    {
+      "id": "vila_verde",
+      "nome": "Vila Verde",
+      "endereco": "Rua dos Ipês, 45, Vila Verde",
+      "horario": "terça a sábado, 08:00 às 16:00",
+      "materiais_aceitos": [
+        "papel",
+        "papelão",
+        "vidro",
+        "plástico",
+        "metal",
+        "óleo de cozinha"
+      ],
+      "materiais_nao_aceitos": [
+        "eletrônicos",
+        "pilhas",
+        "baterias",
+        "entulho",
+        "volumosos",
+        "pneus",
+        "lâmpadas fluorescentes",
+        "medicamentos"
+      ],
+      "situacao": "em funcionamento"
+    },
+    {
+      "id": "industrial",
+      "nome": "Industrial",
+      "endereco": "Rodovia Municipal EC-020, km 3, Distrito Industrial",
+      "horario": "segunda a sexta, 07:00 às 16:00; sábado, 07:00 às 11:00",
+      "materiais_aceitos": [
+        "papel",
+        "papelão",
+        "vidro",
+        "plástico",
+        "metal",
+        "eletrônicos",
+        "pilhas",
+        "baterias",
+        "entulho",
+        "volumosos",
+        "pneus",
+        "lâmpadas fluorescentes"
+      ],
+      "materiais_nao_aceitos": [
+        "óleo de cozinha",
+        "resíduos orgânicos",
+        "medicamentos",
+        "líquidos perigosos"
+      ],
+      "situacao": "em funcionamento"
+    }
+  ],
+  "comunicados": [
+    {
+      "id": "interdicao_parque_das_acacias_2026",
+      "ecoponto_id": "parque_das_acacias",
+      "publicado_em": "2026-03-10",
+      "interdicao_inicio": "2026-03-15",
+      "interdicao_fim": "2026-05-31",
+      "reabertura_em": "2026-06-01",
+      "horario_apos_reabertura": "segunda a sexta, 08:00 às 17:00; sábado, 08:00 às 12:00",
+      "materiais_aceitos_apos_reabertura": [
+        "papel",
+        "papelão",
+        "vidro",
+        "plástico",
+        "metal",
+        "eletrônicos"
+      ],
+      "materiais_removidos_apos_reabertura": [
+        "pilhas",
+        "baterias"
+      ],
+      "alternativas_durante_interdicao": {
+        "papel, papelão, vidro, plástico e metal": "Ecoponto Centro ou Ecoponto Vila Verde",
+        "eletrônicos": "Ecoponto Industrial",
+        "pilhas e baterias": "Ecoponto Industrial",
+        "entulho, volumosos, pneus e lâmpadas fluorescentes": "Ecoponto Industrial",
+        "óleo de cozinha usado": "Ecoponto Vila Verde"
+      },
+      "observacao": "A interdição vale de 15 de março a 31 de maio de 2026, inclusive. A partir de 1º de junho de 2026, o ponto reabre com horário reduzido e deixa de aceitar pilhas e baterias."
+    }
+  ]
+}

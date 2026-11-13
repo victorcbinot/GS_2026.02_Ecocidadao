@@ -1,0 +1,37 @@
+# Dependencias iniciais do EcoCidadao.
+# As versoes serao fixadas apos validacao no ambiente local.
+
+# Configuracao e variaveis de ambiente
+python-dotenv>=1.0
+pydantic-settings>=2.0
+
+# LangChain, LCEL, ChatOllama e integracoes
+langchain>=0.3
+langchain-core>=0.3
+langchain-community>=0.3
+langchain-text-splitters>=0.3
+langchain-ollama>=0.2
+langchain-chroma>=0.2
+langchain-huggingface>=0.1
+
+# Banco vetorial com persistencia local
+chromadb>=1.0,<2
+
+# Embeddings locais (CPU; sem chamadas de nuvem)
+sentence-transformers>=3.0,<6
+numpy>=1.26,<3
+
+# Interface
+gradio>=5.0
+
+# Avaliacao RAGAS
+ragas>=0.2
+datasets>=3.0
+pandas>=2.0
+
+# Documentos com metadados
+python-frontmatter>=1.1
+PyYAML>=6.0
+
+# Testes
+pytest>=8.0

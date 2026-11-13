@@ -1,0 +1,48 @@
+
+# Variaveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Ferramentas e caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+
+# ChromaDB e artefatos gerados
+data/chroma/
+data/chunks/
+.chroma/
+chroma.sqlite3
+
+# Logs
+*.log
+
+# IDEs e sistema operacional
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+desktop.ini
+.DS_Store
