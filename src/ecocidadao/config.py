@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
-from typing import Literal
 
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -46,13 +45,9 @@ class Settings(BaseSettings):
         PROJECT_ROOT / "data" / "experiments" / "chunking_comparison.json"
     )
 
-    chunk_strategy: Literal["fixo", "markdown"] = "markdown"
     collection_name: str = "ecocidadao_markdown"
-    chunk_size: int = 900
-    chunk_overlap: int = 120
     retrieval_top_k: int = Field(default=6, ge=1)
     retrieval_fetch_k: int = Field(default=20, ge=1)
-    retrieval_mmr_lambda: float = Field(default=0.5, ge=0.0, le=1.0)
     retrieval_score_threshold: float = Field(default=0.35, ge=0.0, le=1.0)
     max_context_chars: int = Field(default=8000, ge=1)
     max_input_chars: int = Field(default=2000, ge=1)

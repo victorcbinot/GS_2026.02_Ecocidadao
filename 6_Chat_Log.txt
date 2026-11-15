@@ -1,0 +1,25 @@
+EcoCidadao - Global Solution 2026.2
+ARQUIVO: 6_Chat_Log.txt
+STATUS: PENDENTE
+
+Nao existe, neste momento, um log de conversa real validado. O Ollama Cloud
+retornou HTTP 402 por falta de creditos, portanto nenhuma conversa real foi
+gerada para este entregavel.
+
+Preencher com a transcricao real quando a conta tiver creditos e o modelo
+configurado estiver disponivel. Sugestao de roteiro:
+
+1. Pergunta sobre descarte de medicamentos vencidos.
+2. Pergunta sobre pilhas no Parque das Acacias antes e depois da interdição.
+3. Pergunta fora do escopo para demonstrar a recusa dos guardrails.
+4. Pergunta que combine consulta de Ecoponto com calculo.
+
+Para cada troca, registrar:
+- data e hora;
+- pergunta do usuario;
+- resposta do assistente;
+- fontes documentais apresentadas;
+- ferramentas usadas;
+- status de guardrail, quando aplicavel.
+
+Nao inventar conversas, respostas, fontes ou resultados.

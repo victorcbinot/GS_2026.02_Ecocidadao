@@ -1,0 +1,15 @@
+EcoCidadao - Global Solution 2026.2
+ARQUIVO: 5_certificacao.txt
+STATUS: PENDENTE
+
+A certificacao do projeto ainda nao foi emitida ou validada.
+
+Preencher este arquivo somente com dados reais, por exemplo:
+- nome completo dos integrantes;
+- curso, turma e instituicao;
+- nome do projeto e data de entrega;
+- nome do professor ou responsavel pela validacao;
+- carga horaria ou atividade certificada, se aplicavel;
+- link ou identificador do certificado, se existir.
+
+Nao inserir certificado, assinatura, carga horaria ou instituicao ficticios.

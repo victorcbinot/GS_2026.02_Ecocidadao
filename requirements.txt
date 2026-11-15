@@ -1,18 +1,14 @@
-# Dependencias iniciais do EcoCidadao.
-# As versoes serao fixadas apos validacao no ambiente local.
+# Dependencias do EcoCidadao.
+# O ambiente local validado usa Python 3.14.3; as faixas mantem suporte a 3.12.
 
 # Configuracao e variaveis de ambiente
 python-dotenv>=1.0
 pydantic-settings>=2.0
 
-# LangChain, LCEL, ChatOllama e integracoes
-langchain>=0.3
+# LangChain: LCEL, prompts, ferramentas, splitter e ChatOllama
 langchain-core>=0.3
-langchain-community>=0.3
 langchain-text-splitters>=0.3
 langchain-ollama>=0.2
-langchain-chroma>=0.2
-langchain-huggingface>=0.1
 
 # Banco vetorial com persistencia local
 chromadb>=1.0,<2
@@ -24,7 +20,8 @@ numpy>=1.26,<3
 # Interface
 gradio>=5.0
 
-# Avaliacao RAGAS
+# Avaliacao RAGAS. O pacote instala as integracoes LangChain necessarias
+# (langchain, langchain-community e langchain-openai).
 ragas==0.4.4
 instructor>=1.3.2,<2
 datasets>=4.0,<6
@@ -35,9 +32,5 @@ pandas>=2.0
 scikit-network==0.12.1; python_version >= "3.14"
 scikit-network>=0.33,<0.34; python_version < "3.14"
 
-# Documentos com metadados
-python-frontmatter>=1.1
+# Leitura do front matter YAML dos documentos
 PyYAML>=6.0
-
-# Testes
-pytest>=8.0
