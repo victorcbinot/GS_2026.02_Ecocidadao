@@ -24,9 +24,8 @@ Ecopontos.
 
 ## Status atual
 
-**Etapas 1 a 6 concluídas. Serviço RAG, guardrails, agente com
-ferramentas e interface Gradio implementados; avaliação RAGAS ainda
-pendente.**
+**Etapas 1 a 7 implementadas. A avaliação RAGAS real está pendente porque
+o Ollama Cloud continua retornando HTTP 402 por falta de créditos.**
 
 - Etapa 1: estrutura de pastas, configuração central, dependências,
   ponto de entrada e documentação.
@@ -43,11 +42,13 @@ pendente.**
 - Etapa 6: interface Gradio com histórico por sessão, fontes por resposta,
   status de guardrails e mensagens amigáveis para falhas de conexão e do
   banco vetorial.
+- Etapa 7: dataset de avaliação com oito perguntas, runner RAGAS, resultado
+  pendente documentado e comparação medida de chunking por retrieval.
 
 A validação com o Ollama Cloud está bloqueada temporariamente por falta
-de créditos na conta (HTTP 402). O serviço e os testes com LLM simulado
-estão funcionando; a resposta real do modelo será validada quando houver
-créditos.
+de créditos na conta (HTTP 402). O serviço, o agente, a interface e os
+testes com LLM simulado estão funcionando. A avaliação RAGAS real vai gerar
+respostas e métricas quando houver créditos; nenhum valor foi inventado.
 
 ## Tecnologias utilizadas e previstas
 
@@ -59,7 +60,7 @@ créditos.
 - ChromaDB com persistência local e duas coleções independentes.
 - Gradio 6.32 para a interface local; o código mantém compatibilidade
   com a API de mensagens do Gradio 5.
-- RAGAS.
+- RAGAS 0.4.4 e `datasets` para a avaliação.
 - python-dotenv e pydantic-settings.
 - unittest para os testes atuais; Pytest previsto para etapas futuras.
 
@@ -68,7 +69,7 @@ créditos.
 ```text
 GS_2026.02_Ecocidadao/
 ├── 2_base_documental/          # documentos da base de conhecimento
-├── 3_avaliacao_ragas.json      # será gerado pela avaliação real
+├── 3_avaliacao_ragas.json      # avaliação real ou pendência documentada
 ├── 4_README.md                 # este arquivo
 ├── 5_certificacao.txt         # pendente de definição
 ├── 6_Chat_Log.txt             # pendente de definição
@@ -106,11 +107,14 @@ GS_2026.02_Ecocidadao/
 de embeddings e banco vetorial (`sentence-transformers`, `torch` e
 `chromadb`) foram instaladas e validadas nesse ambiente, mas o
 `requirements.txt` mantém compatibilidade com Python 3.12. A interface
-`gradio` 6.32 foi instalada e validada neste ambiente; a avaliação
-(`ragas` e `datasets`) ainda será instalada e validada. Caso alguma
-dependência não ofereça suporte, recomenda-se criar o ambiente virtual
-com Python 3.11 ou 3.12. Nenhuma configuração global do computador deve
-ser alterada.
+`gradio` 6.32, o `ragas` 0.4.4 e o `datasets` 5.2.0 também foram
+instalados e validados. O `scikit-network`, dependência opcional usada
+apenas na geração de testset do RAGAS, não tem wheel recente para Python
+3.14; por isso o `requirements.txt` fixa a versão pura 0.12.1 nesse
+interpretador. As métricas usadas nesta avaliação não dependem dessa
+biblioteca. Caso alguma dependência não ofereça suporte, recomenda-se
+criar o ambiente virtual com Python 3.11 ou 3.12. Nenhuma configuração
+global do computador deve ser alterada.
 
 ## Instalação
 
@@ -134,7 +138,8 @@ Depois preencha `OLLAMA_API_KEY` e `OLLAMA_MODEL` no `.env`. O arquivo
 
 O `requirements.txt` utiliza faixas de versão compatíveis com Python
 3.12. O ambiente local validado usa Python 3.14.3 com as dependências
-instaladas em `.venv/`.
+instaladas em `.venv/`; o marcador de ambiente seleciona a versão de
+`scikit-network` adequada a cada interpretador.
 
 ## Execução
 
@@ -303,7 +308,7 @@ Comportamentos implementados:
 
 Os guardrails são heurísticos e complementam, mas não substituem, a
 validação humana e a resposta real do modelo. A suíte completa está em
-**136 testes automatizados**:
+**151 testes automatizados**:
 
 ```powershell
 python -m unittest discover -s tests -v
@@ -384,6 +389,51 @@ e `EcoCidadaoAgent` para guardrails, ferramentas e respostas.
 - **Sessão:** o botão “Limpar conversa” apaga o histórico e reinicia o
   estado da sessão.
 
+## Avaliação RAGAS e comparação de chunking
+
+O dataset em `src/ecocidadao/evaluation/dataset.json` contém exatamente
+oito perguntas: quatro simples e quatro de armadilha. As perguntas de
+armadilha exigem resolver a interdição do Parque das Acácias, a mudança
+permanente após 1º/06/2026 ou a prevalência do comunicado mais recente
+sobre a lista de fevereiro. Todos os `ground_truth` estão marcados como
+`pendente_validacao_humana`; eles são rascunhos técnicos e não foram
+declarados validados pelos integrantes ou pelo professor.
+
+Avaliação real:
+
+```powershell
+python scripts/evaluate_ragas.py
+```
+
+O runner recupera contextos, tenta gerar as respostas com o modelo
+configurado e aplica `faithfulness`, `answer_relevancy`,
+`context_precision` e `context_recall`. A saída é
+`3_avaliacao_ragas.json`, com pergunta, resposta gerada, contextos,
+ground truth e métricas. A execução local atual está registrada como
+`pendente` porque o Ollama Cloud retornou **HTTP 402**; as métricas
+permanecem `null` e o motivo está documentado no arquivo.
+
+Comparação de chunking:
+
+```powershell
+python scripts/compare_chunking.py
+```
+
+A saída é `data/experiments/chunking_comparison.json`. A comparação usa
+as duas estratégias já implementadas, recria índices temporários no
+ChromaDB com os mesmos embeddings locais e mede, por pergunta, Hit@3,
+Hit@5, MRR e métricas documentais de precision/recall. Na execução local:
+
+| Estratégia | Chunks | Média de caracteres | Hit@3 | Hit@5 | MRR | Precision documental | Recall documental |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| E1 fixo | 17 | 607 | 1,0 | 1,0 | 1,0 | 0,725 | 1,0 |
+| E2 markdown | 22 | 453,77 | 1,0 | 1,0 | 1,0 | 0,800 | 0,875 |
+
+As métricas documentais de precision/recall são proxies calculados a
+partir dos `reference_doc_ids`; não são as métricas RAGAS. As métricas
+RAGAS de contexto continuam pendentes de LLM. Por isso o experimento
+registra `winner = null` e não declara uma estratégia vencedora.
+
 ## Variáveis de ambiente
 
 | Variável | Finalidade |
@@ -404,6 +454,7 @@ e `EcoCidadaoAgent` para guardrails, ferramentas e respostas.
 | `ECOPONTOS_DATA_PATH` | Dados estruturados dos Ecopontos. |
 | `EVALUATION_DATASET_PATH` | Dataset das oito perguntas do RAGAS. |
 | `RAGAS_OUTPUT_PATH` | Arquivo de saída da avaliação real. |
+| `CHUNKING_EXPERIMENT_PATH` | Arquivo da comparação medida de chunking. |
 | `CHUNK_STRATEGY` | Estratégia de chunking (`fixo` ou `markdown`). |
 | `COLLECTION_NAME` | Coleção do ChromaDB. |
 | `CHUNK_SIZE` / `CHUNK_OVERLAP` | Parâmetros de chunking. |
@@ -445,18 +496,21 @@ documentado. Por esse motivo:
    falta validar com o Ollama Cloud real.
 7. ~~Interface Gradio com histórico e fontes.~~ Concluído; falta validar
    com o Ollama Cloud real.
-8. Avaliação RAGAS com oito perguntas reais.
+8. ~~Dataset de oito perguntas, runner RAGAS e comparação medida de
+   chunking.~~ Concluído; a avaliação RAGAS real continua pendente.
 9. Finalização dos entregáveis, vídeo e checklist da entrega.
 
 ## Pendências conhecidas
 
 - Adicionar créditos à conta do Ollama Cloud para validar respostas reais.
+- Executar `python scripts/evaluate_ragas.py` com créditos e substituir o
+  status `pendente` de `3_avaliacao_ragas.json` por métricas reais.
+- Validar os oito `ground_truth` marcados como
+  `pendente_validacao_humana`.
 - Confirmar a compatibilidade do Python 3.14.3 ou usar Python 3.12.
-- Instalar e validar `ragas` e `datasets`.
-- Implementar a avaliação RAGAS com oito perguntas reais.
 - Validar guardrails, agente e interface com respostas reais do Ollama
   Cloud quando a conta tiver créditos.
-- Gerar `3_avaliacao_ragas.json`, `5_certificacao.txt`, `6_Chat_Log.txt`
-  e `7_demo_video_url.txt`.
+- Concluir `5_certificacao.txt`, `6_Chat_Log.txt` e
+  `7_demo_video_url.txt`.
 - Preencher os nomes dos integrantes do trio.
 - Remover ou substituir o `main.py` de exemplo, se a equipe autorizar.

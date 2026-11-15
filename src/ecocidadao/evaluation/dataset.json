@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "description": "Dataset de avaliação do EcoCidadão com oito perguntas: quatro simples e quatro que exigem resolver conflitos temporais ou de vigência entre os documentos.",
+  "ground_truth_status": "pendente_validacao_humana",
+  "questions": [
+    {
+      "id": "simple_medicamentos",
+      "category": "simples",
+      "question": "Onde uma pessoa deve descartar medicamentos vencidos e qual é o horário de atendimento desse local?",
+      "as_of": "2026-06-10",
+      "trap_type": null,
+      "ground_truth": "Medicamentos vencidos não devem ser entregues em Ecopontos. Eles devem ser levados à Farmácia Municipal EcoSaúde, na Rua das Palmeiras, 77, Centro, que atende de segunda a sexta-feira, das 08:00 às 17:00.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "regulamento_descarte"
+      ],
+      "reference_sections": [
+        "6. Descarte de medicamentos e resíduos de saúde"
+      ],
+      "expected_answer_points": [
+        "medicamentos não são aceitos em Ecopontos",
+        "Farmácia Municipal EcoSaúde",
+        "Rua das Palmeiras, 77, Centro",
+        "segunda a sexta, 08:00 às 17:00"
+      ]
+    },
+    {
+      "id": "simple_vila_verde",
+      "category": "simples",
+      "question": "Quais materiais são aceitos no Ecoponto Vila Verde e qual é o horário de funcionamento?",
+      "as_of": "2026-06-10",
+      "trap_type": null,
+      "ground_truth": "O Ecoponto Vila Verde aceita papel, papelão, vidro, plástico, metal e óleo de cozinha usado. Funciona de terça a sábado, das 08:00 às 16:00.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "lista_ecopontos"
+      ],
+      "reference_sections": [
+        "Ecopontos em funcionamento",
+        "Materiais não aceitos em cada ponto"
+      ],
+      "expected_answer_points": [
+        "papel, papelão, vidro, plástico e metal",
+        "óleo de cozinha usado",
+        "terça a sábado",
+        "08:00 às 16:00"
+      ]
+    },
+    {
+      "id": "simple_oleo",
+      "category": "simples",
+      "question": "Onde entregar óleo de cozinha usado e qual é o limite máximo por entrega?",
+      "as_of": "2026-06-10",
+      "trap_type": null,
+      "ground_truth": "O óleo de cozinha usado deve ser entregue exclusivamente no Ecoponto Vila Verde, em garrafa PET lacrada, com no máximo 2 litros por entrega.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "lista_ecopontos",
+        "regulamento_descarte"
+      ],
+      "reference_sections": [
+        "Observações importantes",
+        "5. Condições e limites"
+      ],
+      "expected_answer_points": [
+        "exclusivamente no Ecoponto Vila Verde",
+        "garrafa PET lacrada",
+        "no máximo 2 litros por entrega"
+      ]
+    },
+    {
+      "id": "simple_entulho",
+      "category": "simples",
+      "question": "Onde entregar entulho e resíduos de construção e qual é o limite mensal por domicílio?",
+      "as_of": "2026-06-10",
+      "trap_type": null,
+      "ground_truth": "Entulho e resíduos de construção devem ser entregues somente no Ecoponto Industrial. O limite é de 2 metros cúbicos por mês por domicílio.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "lista_ecopontos",
+        "regulamento_descarte"
+      ],
+      "reference_sections": [
+        "Observações importantes",
+        "5. Condições e limites"
+      ],
+      "expected_answer_points": [
+        "somente no Ecoponto Industrial",
+        "limite de 2 metros cúbicos por mês",
+        "por domicílio"
+      ]
+    },
+    {
+      "id": "trap_parque_interdito_pilhas",
+      "category": "armadilha",
+      "question": "Em 20 de abril de 2026, o Parque das Acácias aceita pilhas e baterias? Se não, para onde esse material deve ser levado nessa data?",
+      "as_of": "2026-04-20",
+      "trap_type": "periodo_de_interdicao",
+      "ground_truth": "Não. O Parque das Acácias está interditado de 15 de março de 2026 a 31 de maio de 2026, inclusive, e não recebe nenhum material nesse período. Em 20 de abril de 2026, pilhas e baterias devem ser levadas ao Ecoponto Industrial.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "comunicado_interdicao",
+        "lista_ecopontos"
+      ],
+      "reference_sections": [
+        "1. Período de interdição",
+        "2. Orientações durante a interdição"
+      ],
+      "expected_answer_points": [
+        "não aceita porque está interditado",
+        "interdição de 15 de março a 31 de maio de 2026, inclusive",
+        "Ecoponto Industrial como alternativa"
+      ]
+    },
+    {
+      "id": "trap_parque_pos_reabertura_pilhas",
+      "category": "armadilha",
+      "question": "Em 10 de junho de 2026, o Parque das Acácias aceita pilhas e baterias? Se não, onde descartá-las?",
+      "as_of": "2026-06-10",
+      "trap_type": "mudanca_permanente_apos_reabertura",
+      "ground_truth": "Não. A partir de 1º de junho de 2026, o Parque das Acácias deixa de aceitar pilhas e baterias. Elas passam a ser recebidas exclusivamente no Ecoponto Industrial.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "comunicado_interdicao",
+        "lista_ecopontos"
+      ],
+      "reference_sections": [
+        "3. Reabertura e mudanças permanentes",
+        "4. Relação com a Lista de Ecopontos de 1º de fevereiro de 2026"
+      ],
+      "expected_answer_points": [
+        "não aceita pilhas e baterias após 1º de junho de 2026",
+        "mudança permanente",
+        "pilhas e baterias exclusivamente no Ecoponto Industrial"
+      ]
+    },
+    {
+      "id": "trap_parque_interdito_eletronicos",
+      "category": "armadilha",
+      "question": "Em 20 de abril de 2026, é possível entregar eletrônicos no Parque das Acácias? Qual é a alternativa?",
+      "as_of": "2026-04-20",
+      "trap_type": "periodo_de_interdicao",
+      "ground_truth": "Não. Durante a interdição de 15 de março de 2026 a 31 de maio de 2026, o Parque das Acácias não recebe nenhum material. Em 20 de abril de 2026, eletrônicos devem ser levados ao Ecoponto Industrial.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "comunicado_interdicao",
+        "lista_ecopontos"
+      ],
+      "reference_sections": [
+        "1. Período de interdição",
+        "2. Orientações durante a interdição"
+      ],
+      "expected_answer_points": [
+        "não, pois o Parque das Acácias está interditado",
+        "interdição até 31 de maio de 2026, inclusive",
+        "eletrônicos devem ir ao Ecoponto Industrial"
+      ]
+    },
+    {
+      "id": "trap_parque_horario_pos_reabertura",
+      "category": "armadilha",
+      "question": "Qual é o horário de funcionamento do Parque das Acácias em 10 de junho de 2026?",
+      "as_of": "2026-06-10",
+      "trap_type": "horario_substituido_por_comunicado",
+      "ground_truth": "Em 10 de junho de 2026, o Parque das Acácias funciona de segunda a sexta-feira, das 08:00 às 17:00, e no sábado, das 08:00 às 12:00. Esse horário foi definido a partir de 1º de junho de 2026 e substitui o horário anterior de segunda a sábado, das 07:00 às 19:00.",
+      "ground_truth_status": "pendente_validacao_humana",
+      "reference_doc_ids": [
+        "comunicado_interdicao",
+        "lista_ecopontos"
+      ],
+      "reference_sections": [
+        "3. Reabertura e mudanças permanentes",
+        "Ecopontos em funcionamento"
+      ],
+      "expected_answer_points": [
+        "segunda a sexta, 08:00 às 17:00",
+        "sábado, 08:00 às 12:00",
+        "horário novo vale a partir de 1º de junho de 2026",
+        "substitui o horário anterior de 07:00 às 19:00"
+      ]
+    }
+  ]
+}

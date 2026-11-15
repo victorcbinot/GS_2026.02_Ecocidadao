@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import sys
 import unittest
 from pathlib import Path
@@ -88,6 +89,23 @@ class LocalEmbeddingModelTests(unittest.TestCase):
         )
 
         self.assertEqual(model.embed_documents([]), [])
+
+    def test_async_embeddings_use_the_same_local_model(self) -> None:
+        fake = FakeSentenceTransformer("modelo-local")
+        model = LocalEmbeddingModel(
+            model_name="modelo-local",
+            model_factory=lambda *args, **kwargs: fake,
+        )
+
+        document_vectors = asyncio.run(
+            model.aembed_documents(["pilhas", "medicamentos"])
+        )
+        query_vector = asyncio.run(model.aembed_query("pilhas"))
+
+        self.assertEqual(document_vectors[0][:2], [6.0, 1.0])
+        self.assertEqual(document_vectors[1][:2], [12.0, 0.0])
+        self.assertEqual(query_vector[:2], [6.0, 1.0])
+        self.assertEqual(len(fake.calls), 2)
 
     def test_default_model_is_multilingual_minilm(self) -> None:
         self.assertEqual(

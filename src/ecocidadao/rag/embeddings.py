@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import os
 from pathlib import Path
 from typing import Any, Callable, Protocol, Sequence
@@ -96,6 +97,18 @@ class LocalEmbeddingModel:
     def embed_query(self, text: str) -> list[float]:
         vectors = self._encode([text])
         return vectors[0]
+
+    async def aembed_documents(
+        self,
+        texts: Sequence[str],
+    ) -> list[list[float]]:
+        return await asyncio.to_thread(
+            self.embed_documents,
+            list(texts),
+        )
+
+    async def aembed_query(self, text: str) -> list[float]:
+        return await asyncio.to_thread(self.embed_query, text)
 
 
 def get_embedding_model() -> LocalEmbeddingModel:

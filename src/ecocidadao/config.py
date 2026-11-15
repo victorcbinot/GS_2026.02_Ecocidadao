@@ -42,6 +42,9 @@ class Settings(BaseSettings):
         PROJECT_ROOT / "src" / "ecocidadao" / "evaluation" / "dataset.json"
     )
     ragas_output_path: Path = PROJECT_ROOT / "3_avaliacao_ragas.json"
+    chunking_experiment_path: Path = (
+        PROJECT_ROOT / "data" / "experiments" / "chunking_comparison.json"
+    )
 
     chunk_strategy: Literal["fixo", "markdown"] = "markdown"
     collection_name: str = "ecocidadao_markdown"
