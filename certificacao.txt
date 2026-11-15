@@ -1,5 +1,5 @@
 EcoCidadao - Global Solution 2026.2
-ARQUIVO: 5_certificacao.txt
+ARQUIVO: certificacao.txt
 STATUS: PENDENTE
 
 A certificacao do projeto ainda nao foi emitida ou validada.

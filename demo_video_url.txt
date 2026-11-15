@@ -1,0 +1,10 @@
+URL do video: [PENDENTE]
+
+Pontos abordados:
+- Instalacao e configuracao do ambiente.
+- Execucao da ingestao e indexacao.
+- Interface Gradio com fontes.
+- Pergunta temporal sobre o Parque das Acacias.
+- Pergunta sobre medicamentos vencidos.
+- Recusa de pergunta fora do escopo.
+- Testes automatizados.

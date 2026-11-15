@@ -23,7 +23,7 @@ from ecocidadao.evaluation import (
 )
 
 DATASET_PATH = PROJECT_ROOT / "src" / "ecocidadao" / "evaluation" / "dataset.json"
-RAGAS_RESULT_PATH = PROJECT_ROOT / "3_avaliacao_ragas.json"
+RAGAS_RESULT_PATH = PROJECT_ROOT / "avaliacao_ragas.json"
 CHUNKING_EXPERIMENT_PATH = (
     PROJECT_ROOT / "data" / "experiments" / "chunking_comparison.json"
 )
@@ -176,7 +176,7 @@ class EvaluationResultTests(unittest.TestCase):
 
     def test_generated_ragas_file_has_valid_schema(self) -> None:
         if not RAGAS_RESULT_PATH.is_file():
-            self.skipTest("3_avaliacao_ragas.json ainda nao foi gerado.")
+            self.skipTest("avaliacao_ragas.json ainda nao foi gerado.")
 
         payload = json.loads(RAGAS_RESULT_PATH.read_text(encoding="utf-8"))
         validate_ragas_result(payload)

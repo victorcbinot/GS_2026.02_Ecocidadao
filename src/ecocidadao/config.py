@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     evaluation_dataset_path: Path = (
         PROJECT_ROOT / "src" / "ecocidadao" / "evaluation" / "dataset.json"
     )
-    ragas_output_path: Path = PROJECT_ROOT / "3_avaliacao_ragas.json"
+    ragas_output_path: Path = PROJECT_ROOT / "avaliacao_ragas.json"
     chunking_experiment_path: Path = (
         PROJECT_ROOT / "data" / "experiments" / "chunking_comparison.json"
     )

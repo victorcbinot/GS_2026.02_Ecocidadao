@@ -1,5 +1,5 @@
 EcoCidadao - Global Solution 2026.2
-ARQUIVO: 6_Chat_Log.txt
+ARQUIVO: Chat_log.txt
 STATUS: PENDENTE
 
 Nao existe, neste momento, um log de conversa real validado. O Ollama Cloud

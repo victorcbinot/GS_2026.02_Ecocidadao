@@ -128,11 +128,11 @@ respostas e métricas quando houver créditos; nenhum valor foi inventado.
 ```text
 GS_2026.02_Ecocidadao/
 ├── 2_base_documental/          # documentos da base de conhecimento
-├── 3_avaliacao_ragas.json      # avaliação real ou pendência documentada
-├── 4_README.md                 # este arquivo
-├── 5_certificacao.txt         # pendente de definição
-├── 6_Chat_Log.txt             # pendente de definição
-├── 7_demo_video_url.txt       # pendente de gravação
+├── avaliacao_ragas.json        # avaliação real ou pendência documentada
+├── README.md                   # este arquivo
+├── certificacao.txt            # pendente de definição
+├── Chat_log.txt                # pendente de definição
+├── demo_video_url.txt          # pendente de gravação
 ├── app.py                      # ponto de entrada da aplicação
 ├── requirements.txt            # dependências do projeto
 ├── .env.example                # modelo de variáveis de ambiente
@@ -523,7 +523,7 @@ python scripts/evaluate_ragas.py
 O runner recupera contextos, tenta gerar as respostas com o modelo
 configurado e aplica `faithfulness`, `answer_relevancy`,
 `context_precision` e `context_recall`. A saída é
-`3_avaliacao_ragas.json`, com pergunta, resposta gerada, contextos,
+`avaliacao_ragas.json`, com pergunta, resposta gerada, contextos,
 ground truth e métricas. A execução local atual está registrada como
 `pendente` porque o Ollama Cloud retornou **HTTP 402**; as métricas
 permanecem `null` e o motivo está documentado no arquivo.
@@ -633,13 +633,12 @@ documentado. Por esse motivo:
 
 - Adicionar créditos à conta do Ollama Cloud para validar respostas reais.
 - Executar `python scripts/evaluate_ragas.py` com créditos e substituir o
-  status `pendente` de `3_avaliacao_ragas.json` por métricas reais.
+  status `pendente` de `avaliacao_ragas.json` por métricas reais.
 - Validar os oito `ground_truth` marcados como
   `pendente_validacao_humana`.
 - Confirmar a compatibilidade do Python 3.14.3 ou usar Python 3.12.
 - Validar guardrails, agente e interface com respostas reais do Ollama
   Cloud quando a conta tiver créditos.
-- Concluir `5_certificacao.txt`, `6_Chat_Log.txt` e
-  `7_demo_video_url.txt`; os arquivos atuais são marcadores de pendência e
-  não contêm dados inventados.
+- Concluir `certificacao.txt`, `Chat_log.txt` e `demo_video_url.txt`; os
+  arquivos atuais são marcadores de pendência e não contêm dados inventados.
 - Preencher os nomes dos integrantes do trio.
