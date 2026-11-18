@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "status": "pendente",
-  "reason": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)",
-  "generated_at": "2026-11-15T06:19:01Z",
+  "status": "executado",
+  "reason": null,
+  "generated_at": "2026-11-18T01:41:48Z",
   "dataset": {
     "source": "src\\ecocidadao\\evaluation\\dataset.json",
     "question_count": 8,
@@ -13,9 +13,13 @@
   "configuration": {
     "collection_name": "ecocidadao_markdown",
     "top_k": 6,
-    "llm_model": "gpt-oss:20b",
-    "llm_base_url": "https://ollama.com",
+    "llm_model": "qwen2.5:7b",
+    "llm_base_url": "http://127.0.0.1:11434",
+    "ragas_judge_model": "qwen2.5:7b",
+    "ragas_judge_base_url": "http://127.0.0.1:11434",
+    "ragas_judge_execution": "local_ollama",
     "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "embedding_execution": "local_sentence_transformers",
     "dataset_path": "src\\ecocidadao\\evaluation\\dataset.json",
     "ragas_version": "0.4.4"
   },
@@ -26,10 +30,10 @@
     "context_recall"
   ],
   "summary": {
-    "faithfulness": null,
-    "answer_relevancy": null,
-    "context_precision": null,
-    "context_recall": null
+    "faithfulness": 0.570833,
+    "answer_relevancy": 0.180817,
+    "context_precision": 0.520833,
+    "context_recall": 0.9375
   },
   "questions": [
     {
@@ -43,7 +47,7 @@
       "reference_doc_ids": [
         "regulamento_descarte"
       ],
-      "generated_answer": null,
+      "generated_answer": "De acordo com o Regulamento de Descarte de Resíduos de EcoCidade [F1], medicamentos vencidos devem ser entregues na Farmácia Municipal EcoSaúde, localizada na Rua das Palmeiras, 77, Centro. A farmácia atende de segunda a sexta-feira, das 08:00 às 17:00. Não há informações sobre horários específicos para o descarte de medicamentos no Ecoponto, então o horário de funcionamento da Farmácia Municipal EcoSaúde deve ser seguido para o descarte de medicamentos vencidos.\n\nNão encontrei informações sobre horários específicos para o descarte de medicamentos no Ecoponto, então recomendo que você entre em contato com a Secretaria Municipal de Meio Ambiente de EcoCidade ou visite o Ecoponto mais próximo para obter mais detalhes.",
       "contexts": [
         "## 6. Descarte de medicamentos e resíduos de saúde  \nMedicamentos vencidos, em desuso ou com embalagem danificada não devem\nser entregues em nenhum Ecoponto. A destinação correta é a Farmácia\nMunicipal EcoSaúde, na Rua das Palmeiras, 77, Centro, de segunda a\nsexta-feira, das 08:00 às 17:00. O local recebe comprimidos, xaropes,\npomadas e embalagens primárias.  \nSeringas, agulhas e outros resíduos perfurocortantes de uso domiciliar\ndevem ser acondicionados em recipiente rígido com tampa e entregues na\nUnidade Básica de Saúde Jardim das Flores. Esses materiais não podem ser\ndescartados no lixo comum nem nos Ecopontos.",
         "## 5. Vigência  \nEste comunicado entra em vigor em 10 de março de 2026. As regras de\nreabertura e as mudanças permanentes continuam válidas após 1º de junho de\n2026, até que outro comunicado oficial as altere.  \nA Secretaria agradece a compreensão da população e reforça que o descarte\nirregular pode causar riscos à saúde pública e ao meio ambiente.",
@@ -73,13 +77,13 @@
         }
       ],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "simple_vila_verde",
@@ -92,7 +96,7 @@
       "reference_doc_ids": [
         "lista_ecopontos"
       ],
-      "generated_answer": null,
+      "generated_answer": "Com base nas informações fornecidas, posso responder à sua pergunta sobre o Ecoponto Vila Verde e seu horário de funcionamento.\n\n### Horário de Funcionamento do Ecoponto Vila Verde\nO horário de funcionamento do Ecoponto Vila Verde é terça a sábado, das 08:00 às 16:00. Este horário foi mencionado no documento [F1], que lista os horários dos Ecopontos em funcionamento.\n\n### Materiais Aceitos\nOs materiais aceitos no Ecoponto Vila Verde incluem:\n- Papel\n- Papelão\n- Vidro\n- Plástico\n- Metal\n- Óleo de cozinha usado\n\nEste conjunto de materiais foi mencionado no mesmo documento [F1].\n\n### Observações Importantes\nÉ importante notar que a lista de materiais aceitos pode ser alterada por comunicados oficiais posteriores. Portanto, é recomendável verificar as informações mais recentes diretamente com a Secretaria Municipal de Meio Ambiente de EcoCidade ou no Ecoponto Vila Verde.\n\nSe você precisar de informações mais atualizadas, sugiro que entre em contato com a Secretaria Municipal de Meio Ambiente de EcoCidade ou visite o Ecoponto Vila Verde para conferir as regras mais recentes.\n\nCaso tenha mais dúvidas, fique à disposição para ajudar! [F1]",
       "contexts": [
         "## Ecopontos em funcionamento  \n| Ecoponto | Endereço | Horário | Materiais aceitos |\n|---|---|---|---|\n| Centro | Rua das Bromélias, 120, Centro | segunda a sexta, 08:00 às 17:00; sábado, 08:00 às 12:00 | papel, papelão, vidro, plástico e metal |\n| Parque das Acácias | Avenida das Acácias, 850, Jardim das Acácias | segunda a sábado, 07:00 às 19:00 | papel, papelão, vidro, plástico, metal, eletrônicos, pilhas e baterias |\n| Vila Verde | Rua dos Ipês, 45, Vila Verde | terça a sábado, 08:00 às 16:00 | papel, papelão, vidro, plástico, metal e óleo de cozinha usado |",
         "| Industrial | Rodovia Municipal EC-020, km 3, Distrito Industrial | segunda a sexta, 07:00 às 16:00; sábado, 07:00 às 11:00 | papel, papelão, vidro, plástico, metal, eletrônicos, pilhas, baterias, entulho, volumosos, pneus e lâmpadas fluorescentes |",
@@ -146,13 +150,13 @@
         }
       ],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.776081393645038,
+        "context_precision": 0.6666666666333333,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "simple_oleo",
@@ -166,7 +170,7 @@
         "lista_ecopontos",
         "regulamento_descarte"
       ],
-      "generated_answer": null,
+      "generated_answer": "De acordo com a informação disponível, você pode entregar óleo de cozinha usado no Ecoponto Vila Verde. O limite máximo por entrega é de 2 litros, e você deve levar o óleo em uma garrafa PET lacrada.\n\n[F2] menciona que \"Óleo de cozinha usado deve ser entregue em garrafa PET lacrada, com no máximo 2 litros por entrega, exclusivamente no Ecoponto Vila Verde.\"\n\nNão encontrei informações sobre outros limites específicos para a quantidade de óleo de cozinha que pode ser entregue. Recomendo que você verifique as regras mais recentes na Central de Atendimento EcoCidade ou na Secretaria Municipal de Meio Ambiente de EcoCidade para garantir que todas as informações estejam atualizadas.",
       "contexts": [
         "| Óleo de cozinha usado | óleo vegetal e gordura de fritura | Vila Verde |\n| Entulho e resíduos de construção | tijolos, telhas, argamassa seca | Industrial |\n| Volumosos | sofás, colchões, móveis desmontados | Industrial |\n| Pneus | pneus de automóveis e motocicletas | Industrial |\n| Lâmpadas fluorescentes | tubulares e compactas | Industrial |",
         "## Observações importantes  \n- Cada domicílio pode entregar até 1 metro cúbico ou 50 quilogramas de\nrecicláveis por dia.\n- Resíduos de construção são limitados a 2 metros cúbicos por mês e\nsomente no Ecoponto Industrial.\n- Volumosos são limitados a dois volumes por mês e somente no Ecoponto\nIndustrial.\n- Óleo de cozinha usado deve ser entregue em garrafa PET lacrada, com no\nmáximo 2 litros por entrega, exclusivamente no Ecoponto Vila Verde.\n- Pilhas e baterias são aceitas no Parque das Acácias e no Ecoponto\nIndustrial.\n- Medicamentos vencidos não são aceitos em nenhum Ecoponto. O destino\ncorreto está descrito no Regulamento de Descarte de Resíduos.\n- Esta lista reflete a situação em 1º de fevereiro de 2026 e pode ser\nalterada por comunicados oficiais posteriores.",
@@ -220,13 +224,13 @@
         }
       ],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.8333333333333334,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "simple_entulho",
@@ -240,7 +244,7 @@
         "lista_ecopontos",
         "regulamento_descarte"
       ],
-      "generated_answer": null,
+      "generated_answer": "De acordo com o Regulamento de Descarte de Resíduos de EcoCidade [F1] e a Lista de Ecopontos de EcoCidade [F2], os limites para a entrega de resíduos de construção são os seguintes:\n\n1. **Entrega de entulho e resíduos de construção**: Cada domicílio pode entregar até 2 metros cúbicos por mês. Essa entrega deve ser realizada no Ecoponto Industrial.\n\n2. **Limite mensal por domicílio**: O limite é de 2 metros cúbicos de resíduos de construção por mês.\n\nNão encontrei informações específicas sobre o limite diário para resíduos de construção. Recomendo que você entre em contato com a Secretaria Municipal de Meio Ambiente de EcoCidade ou visite o Ecoponto mais próximo para obter mais detalhes sobre a entrega diária, se necessário.",
       "contexts": [
         "## 5. Condições e limites  \nCada domicílio pode entregar até 1 metro cúbico ou 50 quilogramas de\nrecicláveis por dia. Para resíduos de construção, o limite é de 2 metros\ncúbicos por mês por domicílio. Volumosos são limitados a dois volumes por\nmês. Óleo de cozinha é limitado a 2 litros por entrega.  \nOs limites não se aplicam a campanhas temporárias autorizadas pela\nSecretaria Municipal de Meio Ambiente. O gerador é responsável pela\nveracidade das informações prestadas e pela separação correta dos\nmateriais.",
         "## Observações importantes  \n- Cada domicílio pode entregar até 1 metro cúbico ou 50 quilogramas de\nrecicláveis por dia.\n- Resíduos de construção são limitados a 2 metros cúbicos por mês e\nsomente no Ecoponto Industrial.\n- Volumosos são limitados a dois volumes por mês e somente no Ecoponto\nIndustrial.\n- Óleo de cozinha usado deve ser entregue em garrafa PET lacrada, com no\nmáximo 2 litros por entrega, exclusivamente no Ecoponto Vila Verde.\n- Pilhas e baterias são aceitas no Parque das Acácias e no Ecoponto\nIndustrial.\n- Medicamentos vencidos não são aceitos em nenhum Ecoponto. O destino\ncorreto está descrito no Regulamento de Descarte de Resíduos.\n- Esta lista reflete a situação em 1º de fevereiro de 2026 e pode ser\nalterada por comunicados oficiais posteriores.",
@@ -294,13 +298,13 @@
         }
       ],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.4,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "trap_parque_interdito_pilhas",
@@ -314,7 +318,7 @@
         "comunicado_interdicao",
         "lista_ecopontos"
       ],
-      "generated_answer": null,
+      "generated_answer": "Com base no contexto fornecido, podemos extrair as seguintes informações:\n\n- O Ecoponto Parque das Acácias foi interditado temporariamente devido a obras de recuperação estrutural da cobertura e do sistema de drenagem, conforme comunicado [F9].\n\n- A interdição do Ecoponto Parque das Acácias foi substituída por um novo comunicado a partir de 15 de março de 2026, conforme [F4].\n\n- O comunicado de interdição entra em vigor em 10 de março de 2026 e as regras de reabertura e mudanças permanentes continuam válidas após 1º de junho de 2026, conforme [F5].\n\n- A lista de Ecopontos de EcoCidade, publicada em 1º de fevereiro de 2026, ainda é válida, mas pode ser alterada por comunicados oficiais posteriores, conforme [F6].\n\n- O Ecoponto Industrial está em funcionamento, com horário de segunda a sexta-feira das 07:00 às 16:00 e sábado das 07:00 às 11:00, aceitando diversos tipos de resíduos, conforme [F7].\n\n- Há orientações sobre como preparar os materiais para entrega nos Ecopontos, como secar e limpar o papel e o papelão, enxaguar e amassar o vidro e o plástico, e usar recipiente rígido e identificado para materiais cortantes, conforme [F8].\n\nPara informações mais específicas ou atualizações, o cidadão deve consultar a Secretaria Municipal de Meio Ambiente de EcoCidade ou o Ecoponto mais próximo.",
       "contexts": [
         "## 3. Reabertura e mudanças permanentes  \nA partir de **1º de junho de 2026**, o Ecoponto Parque das Acácias volta a\nfuncionar, mas com as seguintes alterações:  \n- novo horário: segunda a sexta-feira, das 08:00 às 17:00; sábado, das\n08:00 às 12:00;\n- o ponto deixa de aceitar pilhas e baterias;\n- pilhas e baterias passam a ser recebidas exclusivamente no Ecoponto\nIndustrial;\n- o ponto continua aceitando papel, papelão, vidro, plástico, metal e\neletrônicos.  \nEssas alterações são permanentes e não se limitam ao período de obras.",
         "## 1. Período de interdição  \nA interdição começa em **15 de março de 2026** e termina em **31 de maio\nde 2026**, inclusive. Durante esse período, o Ecoponto Parque das Acácias\nnão receberá nenhum material.",
@@ -400,13 +404,13 @@
         }
       ],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.3254745066362376,
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "trap_parque_pos_reabertura_pilhas",
@@ -420,99 +424,17 @@
         "comunicado_interdicao",
         "lista_ecopontos"
       ],
-      "generated_answer": null,
-      "contexts": [
-        "## 3. Reabertura e mudanças permanentes  \nA partir de **1º de junho de 2026**, o Ecoponto Parque das Acácias volta a\nfuncionar, mas com as seguintes alterações:  \n- novo horário: segunda a sexta-feira, das 08:00 às 17:00; sábado, das\n08:00 às 12:00;\n- o ponto deixa de aceitar pilhas e baterias;\n- pilhas e baterias passam a ser recebidas exclusivamente no Ecoponto\nIndustrial;\n- o ponto continua aceitando papel, papelão, vidro, plástico, metal e\neletrônicos.  \nEssas alterações são permanentes e não se limitam ao período de obras.",
-        "## 6. Descarte de medicamentos e resíduos de saúde  \nMedicamentos vencidos, em desuso ou com embalagem danificada não devem\nser entregues em nenhum Ecoponto. A destinação correta é a Farmácia\nMunicipal EcoSaúde, na Rua das Palmeiras, 77, Centro, de segunda a\nsexta-feira, das 08:00 às 17:00. O local recebe comprimidos, xaropes,\npomadas e embalagens primárias.  \nSeringas, agulhas e outros resíduos perfurocortantes de uso domiciliar\ndevem ser acondicionados em recipiente rígido com tampa e entregues na\nUnidade Básica de Saúde Jardim das Flores. Esses materiais não podem ser\ndescartados no lixo comum nem nos Ecopontos.",
-        "## 1. Período de interdição  \nA interdição começa em **15 de março de 2026** e termina em **31 de maio\nde 2026**, inclusive. Durante esse período, o Ecoponto Parque das Acácias\nnão receberá nenhum material.",
-        "## 5. Vigência  \nEste comunicado entra em vigor em 10 de março de 2026. As regras de\nreabertura e as mudanças permanentes continuam válidas após 1º de junho de\n2026, até que outro comunicado oficial as altere.  \nA Secretaria agradece a compreensão da população e reforça que o descarte\nirregular pode causar riscos à saúde pública e ao meio ambiente.",
-        "## 4. Relação com a Lista de Ecopontos de 1º de fevereiro de 2026  \nAs informações sobre o Ecoponto Parque das Acácias publicadas na Lista de\nEcopontos de 1º de fevereiro de 2026 ficam substituídas por este\ncomunicado a partir de 15 de março de 2026. A lista continua válida para\nos demais Ecopontos.",
-        "## Observações importantes  \n- Cada domicílio pode entregar até 1 metro cúbico ou 50 quilogramas de\nrecicláveis por dia.\n- Resíduos de construção são limitados a 2 metros cúbicos por mês e\nsomente no Ecoponto Industrial.\n- Volumosos são limitados a dois volumes por mês e somente no Ecoponto\nIndustrial.\n- Óleo de cozinha usado deve ser entregue em garrafa PET lacrada, com no\nmáximo 2 litros por entrega, exclusivamente no Ecoponto Vila Verde.\n- Pilhas e baterias são aceitas no Parque das Acácias e no Ecoponto\nIndustrial.\n- Medicamentos vencidos não são aceitos em nenhum Ecoponto. O destino\ncorreto está descrito no Regulamento de Descarte de Resíduos.\n- Esta lista reflete a situação em 1º de fevereiro de 2026 e pode ser\nalterada por comunicados oficiais posteriores.",
-        "| Industrial | Rodovia Municipal EC-020, km 3, Distrito Industrial | segunda a sexta, 07:00 às 16:00; sábado, 07:00 às 11:00 | papel, papelão, vidro, plástico, metal, eletrônicos, pilhas, baterias, entulho, volumosos, pneus e lâmpadas fluorescentes |",
-        "# Comunicado de Interdição do Ecoponto Parque das Acácias  \n> Documento fictício produzido para o projeto EcoCidadão. EcoCidade, seus\n> órgãos, endereços e dados são simulados e não representam um município\n> real.  \nA Secretaria Municipal de Meio Ambiente de EcoCidade comunica a interdição\ntemporária do Ecoponto Parque das Acácias, localizado na Avenida das\nAcácias, 850, Jardim das Acácias, para obras de recuperação estrutural da\ncobertura e do sistema de drenagem.",
-        "## Ecopontos em funcionamento  \n| Ecoponto | Endereço | Horário | Materiais aceitos |\n|---|---|---|---|\n| Centro | Rua das Bromélias, 120, Centro | segunda a sexta, 08:00 às 17:00; sábado, 08:00 às 12:00 | papel, papelão, vidro, plástico e metal |\n| Parque das Acácias | Avenida das Acácias, 850, Jardim das Acácias | segunda a sábado, 07:00 às 19:00 | papel, papelão, vidro, plástico, metal, eletrônicos, pilhas e baterias |\n| Vila Verde | Rua dos Ipês, 45, Vila Verde | terça a sábado, 08:00 às 16:00 | papel, papelão, vidro, plástico, metal e óleo de cozinha usado |",
-        "## 2. Orientações durante a interdição  \n| Material | Local alternativo |\n|---|---|\n| Papel, papelão, vidro, plástico e metal | Ecoponto Centro ou Ecoponto Vila Verde |\n| Eletrônicos | Ecoponto Industrial |\n| Pilhas e baterias | Ecoponto Industrial |\n| Entulho, volumosos, pneus e lâmpadas fluorescentes | Ecoponto Industrial |\n| Óleo de cozinha usado | Ecoponto Vila Verde |  \nMedicamentos vencidos continuam sem ser aceitos em Ecopontos. O cidadão\ndeve seguir a orientação do Regulamento de Descarte de Resíduos."
-      ],
-      "context_metadata": [
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0003",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 3. Reabertura e mudanças permanentes",
-          "similarity": 0.6429212689399719
-        },
-        {
-          "chunk_id": "regulamento_descarte::markdown::0007",
-          "doc_id": "regulamento_descarte",
-          "source_file": "regulamento_descarte.md",
-          "section": "Regulamento de Descarte de Resíduos de EcoCidade > 6. Descarte de medicamentos e resíduos de saúde",
-          "similarity": 0.5483824014663696
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0001",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 1. Período de interdição",
-          "similarity": 0.5388023853302002
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0005",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 5. Vigência",
-          "similarity": 0.4992595911026001
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0004",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 4. Relação com a Lista de Ecopontos de 1º de fevereiro de 2026",
-          "similarity": 0.4974174499511719
-        },
-        {
-          "chunk_id": "lista_ecopontos::markdown::0004",
-          "doc_id": "lista_ecopontos",
-          "source_file": "lista_ecopontos.md",
-          "section": "Lista de Ecopontos de EcoCidade > Observações importantes",
-          "similarity": 0.46814972162246704
-        },
-        {
-          "chunk_id": "lista_ecopontos::markdown::0002",
-          "doc_id": "lista_ecopontos",
-          "source_file": "lista_ecopontos.md",
-          "section": "Lista de Ecopontos de EcoCidade > Ecopontos em funcionamento",
-          "similarity": 0.4415625333786011
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0000",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias",
-          "similarity": 0.437965452671051
-        },
-        {
-          "chunk_id": "lista_ecopontos::markdown::0001",
-          "doc_id": "lista_ecopontos",
-          "source_file": "lista_ecopontos.md",
-          "section": "Lista de Ecopontos de EcoCidade > Ecopontos em funcionamento",
-          "similarity": 0.4245743155479431
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0002",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 2. Orientações durante a interdição",
-          "similarity": 0.40617644786834717
-        }
-      ],
+      "generated_answer": "Não encontrei informações suficientes na base documental para responder com segurança. Para orientações adicionais, procure a Secretaria Municipal de Meio Ambiente de EcoCidade ou o Ecoponto mais próximo.",
+      "contexts": [],
+      "context_metadata": [],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "trap_parque_interdito_eletronicos",
@@ -526,91 +448,17 @@
         "comunicado_interdicao",
         "lista_ecopontos"
       ],
-      "generated_answer": null,
-      "contexts": [
-        "## 3. Reabertura e mudanças permanentes  \nA partir de **1º de junho de 2026**, o Ecoponto Parque das Acácias volta a\nfuncionar, mas com as seguintes alterações:  \n- novo horário: segunda a sexta-feira, das 08:00 às 17:00; sábado, das\n08:00 às 12:00;\n- o ponto deixa de aceitar pilhas e baterias;\n- pilhas e baterias passam a ser recebidas exclusivamente no Ecoponto\nIndustrial;\n- o ponto continua aceitando papel, papelão, vidro, plástico, metal e\neletrônicos.  \nEssas alterações são permanentes e não se limitam ao período de obras.",
-        "## 1. Período de interdição  \nA interdição começa em **15 de março de 2026** e termina em **31 de maio\nde 2026**, inclusive. Durante esse período, o Ecoponto Parque das Acácias\nnão receberá nenhum material.",
-        "| Industrial | Rodovia Municipal EC-020, km 3, Distrito Industrial | segunda a sexta, 07:00 às 16:00; sábado, 07:00 às 11:00 | papel, papelão, vidro, plástico, metal, eletrônicos, pilhas, baterias, entulho, volumosos, pneus e lâmpadas fluorescentes |",
-        "## 4. Relação com a Lista de Ecopontos de 1º de fevereiro de 2026  \nAs informações sobre o Ecoponto Parque das Acácias publicadas na Lista de\nEcopontos de 1º de fevereiro de 2026 ficam substituídas por este\ncomunicado a partir de 15 de março de 2026. A lista continua válida para\nos demais Ecopontos.",
-        "## 5. Vigência  \nEste comunicado entra em vigor em 10 de março de 2026. As regras de\nreabertura e as mudanças permanentes continuam válidas após 1º de junho de\n2026, até que outro comunicado oficial as altere.  \nA Secretaria agradece a compreensão da população e reforça que o descarte\nirregular pode causar riscos à saúde pública e ao meio ambiente.",
-        "## 6. Descarte de medicamentos e resíduos de saúde  \nMedicamentos vencidos, em desuso ou com embalagem danificada não devem\nser entregues em nenhum Ecoponto. A destinação correta é a Farmácia\nMunicipal EcoSaúde, na Rua das Palmeiras, 77, Centro, de segunda a\nsexta-feira, das 08:00 às 17:00. O local recebe comprimidos, xaropes,\npomadas e embalagens primárias.  \nSeringas, agulhas e outros resíduos perfurocortantes de uso domiciliar\ndevem ser acondicionados em recipiente rígido com tampa e entregues na\nUnidade Básica de Saúde Jardim das Flores. Esses materiais não podem ser\ndescartados no lixo comum nem nos Ecopontos.",
-        "## Ecopontos em funcionamento  \n| Ecoponto | Endereço | Horário | Materiais aceitos |\n|---|---|---|---|\n| Centro | Rua das Bromélias, 120, Centro | segunda a sexta, 08:00 às 17:00; sábado, 08:00 às 12:00 | papel, papelão, vidro, plástico e metal |\n| Parque das Acácias | Avenida das Acácias, 850, Jardim das Acácias | segunda a sábado, 07:00 às 19:00 | papel, papelão, vidro, plástico, metal, eletrônicos, pilhas e baterias |\n| Vila Verde | Rua dos Ipês, 45, Vila Verde | terça a sábado, 08:00 às 16:00 | papel, papelão, vidro, plástico, metal e óleo de cozinha usado |",
-        "# Comunicado de Interdição do Ecoponto Parque das Acácias  \n> Documento fictício produzido para o projeto EcoCidadão. EcoCidade, seus\n> órgãos, endereços e dados são simulados e não representam um município\n> real.  \nA Secretaria Municipal de Meio Ambiente de EcoCidade comunica a interdição\ntemporária do Ecoponto Parque das Acácias, localizado na Avenida das\nAcácias, 850, Jardim das Acácias, para obras de recuperação estrutural da\ncobertura e do sistema de drenagem.",
-        "## Observações importantes  \n- Cada domicílio pode entregar até 1 metro cúbico ou 50 quilogramas de\nrecicláveis por dia.\n- Resíduos de construção são limitados a 2 metros cúbicos por mês e\nsomente no Ecoponto Industrial.\n- Volumosos são limitados a dois volumes por mês e somente no Ecoponto\nIndustrial.\n- Óleo de cozinha usado deve ser entregue em garrafa PET lacrada, com no\nmáximo 2 litros por entrega, exclusivamente no Ecoponto Vila Verde.\n- Pilhas e baterias são aceitas no Parque das Acácias e no Ecoponto\nIndustrial.\n- Medicamentos vencidos não são aceitos em nenhum Ecoponto. O destino\ncorreto está descrito no Regulamento de Descarte de Resíduos.\n- Esta lista reflete a situação em 1º de fevereiro de 2026 e pode ser\nalterada por comunicados oficiais posteriores."
-      ],
-      "context_metadata": [
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0003",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 3. Reabertura e mudanças permanentes",
-          "similarity": 0.6067343950271606
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0001",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 1. Período de interdição",
-          "similarity": 0.4966239333152771
-        },
-        {
-          "chunk_id": "lista_ecopontos::markdown::0002",
-          "doc_id": "lista_ecopontos",
-          "source_file": "lista_ecopontos.md",
-          "section": "Lista de Ecopontos de EcoCidade > Ecopontos em funcionamento",
-          "similarity": 0.48328208923339844
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0004",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 4. Relação com a Lista de Ecopontos de 1º de fevereiro de 2026",
-          "similarity": 0.4821961522102356
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0005",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias > 5. Vigência",
-          "similarity": 0.477463960647583
-        },
-        {
-          "chunk_id": "regulamento_descarte::markdown::0007",
-          "doc_id": "regulamento_descarte",
-          "source_file": "regulamento_descarte.md",
-          "section": "Regulamento de Descarte de Resíduos de EcoCidade > 6. Descarte de medicamentos e resíduos de saúde",
-          "similarity": 0.44723278284072876
-        },
-        {
-          "chunk_id": "lista_ecopontos::markdown::0001",
-          "doc_id": "lista_ecopontos",
-          "source_file": "lista_ecopontos.md",
-          "section": "Lista de Ecopontos de EcoCidade > Ecopontos em funcionamento",
-          "similarity": 0.42653536796569824
-        },
-        {
-          "chunk_id": "comunicado_interdicao::markdown::0000",
-          "doc_id": "comunicado_interdicao",
-          "source_file": "comunicado_interdicao.md",
-          "section": "Comunicado de Interdição do Ecoponto Parque das Acácias",
-          "similarity": 0.3638930320739746
-        },
-        {
-          "chunk_id": "lista_ecopontos::markdown::0004",
-          "doc_id": "lista_ecopontos",
-          "source_file": "lista_ecopontos.md",
-          "section": "Lista de Ecopontos de EcoCidade > Observações importantes",
-          "similarity": 0.36253225803375244
-        }
-      ],
+      "generated_answer": "Não encontrei informações suficientes na base documental para responder com segurança. Para orientações adicionais, procure a Secretaria Municipal de Meio Ambiente de EcoCidade ou o Ecoponto mais próximo.",
+      "contexts": [],
+      "context_metadata": [],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 1.0
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     },
     {
       "id": "trap_parque_horario_pos_reabertura",
@@ -624,7 +472,7 @@
         "comunicado_interdicao",
         "lista_ecopontos"
       ],
-      "generated_answer": null,
+      "generated_answer": "Com base no contexto fornecido, podemos fazer as seguintes observações:\n\n1. O Ecoponto Parque das Acácias foi interditado temporariamente a partir de 15 de março de 2026 para obras de recuperação estrutural, conforme comunicado [F7].\n\n2. As informações sobre o Ecoponto Parque das Acácias na Lista de Ecopontos de 1º de fevereiro de 2026 foram substituídas a partir de 15 de março de 2026, conforme comunicado [F4].\n\n3. O comunicado de interdição entra em vigor em 10 de março de 2026 e as regras de reabertura e mudanças permanentes continuam válidas após 1º de junho de 2026, conforme comunicado [F4].\n\n4. O horário de funcionamento do Ecoponto Parque das Acácias não foi mencionado diretamente, mas era supostamente de segunda a sábado, 07:00 às 19:00, antes da interdição.\n\n5. O Ecoponto Parque das Acácias não está mais listado como em funcionamento na Lista de Ecopontos de 1º de fevereiro de 2026, conforme [F5] e [F6].\n\n6. A Secretaria Municipal de Meio Ambiente de EcoCidade agradece a compreensão da população e reforça que o descarte irregular pode causar riscos à saúde pública e ao meio ambiente, conforme comunicado [F4].\n\nPara informações mais atualizadas ou detalhadas, o cidadão deve procurar a Secretaria Municipal de Meio Ambiente de EcoCidade ou o Ecoponto mais próximo.",
       "contexts": [
         "## 3. Reabertura e mudanças permanentes  \nA partir de **1º de junho de 2026**, o Ecoponto Parque das Acácias volta a\nfuncionar, mas com as seguintes alterações:  \n- novo horário: segunda a sexta-feira, das 08:00 às 17:00; sábado, das\n08:00 às 12:00;\n- o ponto deixa de aceitar pilhas e baterias;\n- pilhas e baterias passam a ser recebidas exclusivamente no Ecoponto\nIndustrial;\n- o ponto continua aceitando papel, papelão, vidro, plástico, metal e\neletrônicos.  \nEssas alterações são permanentes e não se limitam ao período de obras.",
         "## 1. Período de interdição  \nA interdição começa em **15 de março de 2026** e termina em **31 de maio\nde 2026**, inclusive. Durante esse período, o Ecoponto Parque das Acácias\nnão receberá nenhum material.",
@@ -702,13 +550,13 @@
         }
       ],
       "metrics": {
-        "faithfulness": null,
-        "answer_relevancy": null,
-        "context_precision": null,
-        "context_recall": null
+        "faithfulness": 0.8333333333333334,
+        "answer_relevancy": 0.34498204729783627,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.5
       },
-      "status": "pendente",
-      "error": "A geracao real das respostas falhou; a avaliacao RAGAS nao foi executada. Erro em simple_medicamentos: RagServiceError: Falha ao consultar o modelo de linguagem: Add usage credits or subscribe and save up to 66%: https://ollama.com/plans (ref: 4ebd1bef-36dd-4005-a40b-7ac7c5db09c8) (status code: 402)"
+      "status": "executado",
+      "error": null
     }
   ]
 }

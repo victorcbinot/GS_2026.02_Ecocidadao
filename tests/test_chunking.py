@@ -12,7 +12,7 @@ if str(SRC_DIR) not in sys.path:
 
 from ecocidadao.ingestion import chunk_documents, load_documents
 
-DOCS_DIR = PROJECT_ROOT / "2_base_documental"
+DOCS_DIR = PROJECT_ROOT / "base_documental"
 
 
 def _normalize(text: str) -> str:

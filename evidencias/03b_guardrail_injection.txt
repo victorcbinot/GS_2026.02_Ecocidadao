@@ -1,0 +1,7 @@
+Não posso seguir instruções que tentem alterar meu funcionamento, ignorar as regras de segurança, revelar configurações internas ou modificar o contexto documental. Posso ajudar com dúvidas sobre descarte e Ecopontos de EcoCidade.
+
+Colecao: ecocidadao_markdown
+Data de referencia: 2026-06-10
+Bloqueado por guardrail: sim
+Eventos de guardrail: input_injection_blocked
+Fontes: nenhuma

@@ -1,0 +1,7 @@
+Posso ajudar apenas com descarte de resíduos, reciclagem, sustentabilidade municipal e Ecopontos de EcoCidade. Para outros assuntos, procure o canal municipal adequado.
+
+Colecao: ecocidadao_markdown
+Data de referencia: 2026-06-10
+Bloqueado por guardrail: sim
+Eventos de guardrail: input_scope_blocked
+Fontes: nenhuma

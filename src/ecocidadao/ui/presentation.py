@@ -3,8 +3,9 @@ from __future__ import annotations
 from ..agent import AGENT_ERROR_ANSWER, AgentResponse, ToolCallRecord
 
 OLLAMA_UNAVAILABLE_ANSWER = (
-    "Não foi possível conectar ao Ollama Cloud. Verifique as credenciais, "
-    "a URL do serviço e a disponibilidade da conta, depois tente novamente."
+    "Não foi possível conectar ao Ollama local. Verifique se o serviço do "
+    "Ollama está em execução, se o modelo configurado foi baixado e se a "
+    "URL local está correta, depois tente novamente."
 )
 
 VECTOR_STORE_UNAVAILABLE_ANSWER = (
@@ -98,7 +99,7 @@ def status_title(response: AgentResponse) -> str:
     if reason == "input_guardrail":
         return "Solicitação recusada pelos guardrails"
     if reason == "llm_error" or _is_llm_failure(response):
-        return "Falha de conexão com o Ollama Cloud"
+        return "Falha de conexão com o Ollama local"
     if _is_vector_store_failure(response):
         return "Base documental ou banco vetorial indisponível"
     if _has_ecoponto_error(response):
@@ -242,7 +243,7 @@ def format_status(response: AgentResponse) -> str:
 
     if _is_llm_failure(response):
         parts.append(
-            "Verifique a configuração do Ollama Cloud e tente novamente."
+            "Verifique a configuração do Ollama local e tente novamente."
         )
     if _is_vector_store_failure(response):
         parts.append(

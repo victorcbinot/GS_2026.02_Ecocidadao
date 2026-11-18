@@ -18,7 +18,7 @@ from ecocidadao.ingestion import (
     validate_expected_documents,
 )
 
-DOCS_DIR = PROJECT_ROOT / "2_base_documental"
+DOCS_DIR = PROJECT_ROOT / "base_documental"
 
 
 def _normalize(text: str) -> str:

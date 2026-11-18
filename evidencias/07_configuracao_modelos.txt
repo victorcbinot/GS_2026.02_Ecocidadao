@@ -1,0 +1,26 @@
+CONFIGURAÇÃO DOS MODELOS — ECOCIDADÃO
+
+Agente principal
+Modelo: gpt-oss:20b
+Endpoint: https://ollama.com
+Chave configurada: Sim
+Execução local: Não
+
+Juiz RAGAS
+Modelo: qwen2.5:7b
+Endpoint: http://127.0.0.1:11434
+Chave configurada: Não
+Execução local: Sim
+
+Embeddings
+Modelo: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+Dispositivo: CPU
+Execução: local
+
+Outras configurações
+Limite de chamadas de ferramentas: 6
+Coleção do ChromaDB: ecocidadao_markdown
+Saída do RAGAS: avaliacao_ragas.json
+Base documental: base_documental
+
+A chave do agente não é exibida neste arquivo.

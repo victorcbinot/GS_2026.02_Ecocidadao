@@ -10,7 +10,11 @@ from .embeddings import (
     LocalEmbeddingModel,
     get_embedding_model,
 )
-from .llm import LLMConfigurationError, create_chat_model
+from .llm import (
+    LLMConfigurationError,
+    create_chat_model,
+    create_judge_chat_model,
+)
 from .prompts import build_prompt
 from ..guardrails import INSUFFICIENT_CONTEXT_ANSWER
 from .service import (
@@ -62,6 +66,7 @@ __all__ = [
     "build_prompt",
     "create_chat_model",
     "create_index",
+    "create_judge_chat_model",
     "extract_date_mentions",
     "get_embedding_model",
     "is_temporal_question",

@@ -1,0 +1,10 @@
+O Parque das Acácias está interditado para aceitar pilhas e baterias em 20 de abril de 2026, conforme a interdição válida de 15 de março a 31 de maio de 2026.
+
+Para entregar pilhas e baterias, você pode encaminhá-las ao Ecoponto Industrial, que está em funcionamento. O endereço do Ecoponto Industrial é Rodovia Municipal EC-020, km 3, Distrito Industrial, e o horário de funcionamento é de segunda a sexta-feira, das 07:00 às 16:00, e aos sábados, das 07:00 às 11:00.
+
+Observação: a partir de 1º de junho de 2026, o Parque das Acácias reabre com horário reduzido e deixa de aceitar pilhas e baterias.
+
+Chamadas de ferramentas: 1
+- consultar_ecopontos (ok): {'data_referencia': '2026-04-20', 'ecoponto': 'Parque das Acácias', 'material': 'pilhas e baterias'}
+Bloqueado por guardrail: nao
+Motivo de parada: completed

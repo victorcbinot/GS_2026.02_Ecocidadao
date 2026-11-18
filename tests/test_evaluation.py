@@ -197,6 +197,8 @@ class ChunkingExperimentTests(unittest.TestCase):
         validate_chunking_experiment(payload)
 
         self.assertIsNone(payload["winner"])
+        self.assertEqual(payload["recommended_strategy"], "markdown")
+        self.assertTrue(payload["recommendation_reason"])
         self.assertEqual(
             {item["strategy"] for item in payload["strategies"]},
             {"fixo", "markdown"},

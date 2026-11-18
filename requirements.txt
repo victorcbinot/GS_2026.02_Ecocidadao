@@ -1,36 +1,45 @@
 # Dependencias do EcoCidadao.
-# O ambiente local validado usa Python 3.14.3; as faixas mantem suporte a 3.12.
+# Versoes fixadas conforme o ambiente local validado com Python 3.14.3.
+# O projeto tambem foi escrito para Python 3.12+; o marcador de ambiente
+# abaixo seleciona a versao de scikit-network disponivel para cada caso.
 
 # Configuracao e variaveis de ambiente
-python-dotenv>=1.0
-pydantic-settings>=2.0
+python-dotenv==1.2.4
+pydantic==2.14.3
+pydantic-settings==2.16.2
 
 # LangChain: LCEL, prompts, ferramentas, splitter e ChatOllama
-langchain-core>=0.3
-langchain-text-splitters>=0.3
-langchain-ollama>=0.2
+langchain==1.5.0
+langchain-core==1.8.0
+langchain-text-splitters==1.1.3
+langchain-ollama==1.1.0
+
+# Integracoes usadas pelo RAGAS
+langchain-community==0.4.2
+langchain-openai==1.8.0
+openai==3.3.0
 
 # Banco vetorial com persistencia local
-chromadb>=1.0,<2
+chromadb==1.5.9
 
 # Embeddings locais (CPU; sem chamadas de nuvem)
-sentence-transformers>=3.0,<6
-numpy>=1.26,<3
+sentence-transformers==5.7.0
+torch==2.15.0
+numpy==2.5.4
 
 # Interface
-gradio>=5.0
+gradio==6.32.0
 
-# Avaliacao RAGAS. O pacote instala as integracoes LangChain necessarias
-# (langchain, langchain-community e langchain-openai).
+# Avaliacao RAGAS
 ragas==0.4.4
-instructor>=1.3.2,<2
-datasets>=4.0,<6
-pandas>=2.0
+instructor==1.17.0
+datasets==5.2.0
+pandas==3.1.1
 
-# scikit-network e usado apenas pela geracao de testset do RAGAS, nao pelas
-# metricas desta avaliacao. A versao nova nao tem wheel para Python 3.14.
+# scikit-network e usado apenas pela geracao de testset do RAGAS.
+# A versao 0.12.1 e a que possui instalacao funcional no Python 3.14.
 scikit-network==0.12.1; python_version >= "3.14"
-scikit-network>=0.33,<0.34; python_version < "3.14"
+scikit-network==0.33.0; python_version < "3.14"
 
 # Leitura do front matter YAML dos documentos
-PyYAML>=6.0
+PyYAML==6.0.3

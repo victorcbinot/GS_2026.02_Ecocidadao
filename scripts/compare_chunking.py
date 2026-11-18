@@ -141,7 +141,8 @@ def main() -> int:
             f"Hit@5={_format_number(metrics['mean_hit_at_5'])} | "
             f"MRR={_format_number(metrics['mean_mrr'])}"
         )
-    print("Vencedor: nao declarado")
+    print("Vencedor empirico: nao declarado")
+    print(f"Recomendacao tecnica: {payload['recommended_strategy']}")
     print(f"RAGAS context precision/recall: {payload['ragas_status']}")
 
     return 0

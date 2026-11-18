@@ -153,8 +153,9 @@ def validate_output(
             answer=PROMPT_INJECTION_REFUSAL,
         )
 
+    citations = extract_citations(cleaned)
     limitation = is_limitation_answer(cleaned)
-    if limitation:
+    if limitation and not citations:
         return OutputAssessment(
             answer=INSUFFICIENT_CONTEXT_ANSWER,
             allowed=True,

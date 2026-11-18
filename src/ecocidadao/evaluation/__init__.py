@@ -1,6 +1,8 @@
 from .chunking import (
     EXPERIMENT_SCHEMA_VERSION,
     EXPERIMENT_STATUS,
+    RECOMMENDATION_REASON,
+    RECOMMENDED_STRATEGY,
     ChunkingExperimentError,
     build_chunking_experiment,
     compute_ranking_metrics,
@@ -40,6 +42,8 @@ __all__ = [
     "EXPECTED_QUESTION_COUNT",
     "GROUND_TRUTH_STATUS",
     "RAGAS_METRIC_NAMES",
+    "RECOMMENDATION_REASON",
+    "RECOMMENDED_STRATEGY",
     "RESULT_SCHEMA_VERSION",
     "RESULT_STATUSES",
     "SIMPLE_QUESTION_COUNT",

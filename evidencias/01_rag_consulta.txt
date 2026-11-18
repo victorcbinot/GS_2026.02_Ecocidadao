@@ -1,0 +1,11 @@
+De acordo com o Regulamento de Descarte de Resíduos de EcoCidade [F1], você deve descartar medicamentos vencidos, em desuso ou com embalagem danificada na Farmácia Municipal EcoSaúde, localizada na Rua das Palmeiras, 77, Centro. A Farmácia EcoSaúde recebe medicamentos vencidos, comprimidos, xaropes, pomadas e embalagens primárias de segunda a sexta-feira, das 08:00 às 17:00.
+
+No entanto, não há informações específicas sobre o horário de funcionamento da Farmácia Municipal EcoSaúde. Recomendo que você entre em contato com a Farmácia EcoSaúde ou a Secretaria Municipal de Meio Ambiente de EcoCidade para confirmar o horário exato de funcionamento.
+
+Se precisar de mais informações, estou à disposição para ajudar!
+
+Colecao: ecocidadao_markdown
+Data de referencia: 2026-06-10
+Bloqueado por guardrail: nao
+Fontes:
+  [F1] Regulamento de Descarte de Resíduos de EcoCidade (documento: regulamento_descarte; publicado em: 2026-01-20; seção: Regulamento de Descarte de Resíduos de EcoCidade > 6. Descarte de medicamentos e resíduos de saúde; arquivo: regulamento_descarte.md)

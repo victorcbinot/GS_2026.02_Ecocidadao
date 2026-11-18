@@ -2,11 +2,23 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+from urllib.parse import urlparse
 
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def is_local_ollama_url(base_url: str) -> bool:
+    host = (urlparse(base_url).hostname or "").casefold()
+    return host in {
+        "localhost",
+        "127.0.0.1",
+        "::1",
+        "0.0.0.0",
+        "host.docker.internal",
+    }
 
 
 class Settings(BaseSettings):
@@ -22,11 +34,16 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     ollama_api_key: SecretStr | None = None
-    ollama_base_url: str = "https://ollama.com"
+    ollama_base_url: str = "http://127.0.0.1:11434"
     ollama_model: str = ""
     llm_temperature: float = 0.1
     llm_max_tokens: int = 1024
     llm_timeout_s: int = 60
+
+    ragas_judge_api_key: SecretStr | None = None
+    ragas_judge_base_url: str = "http://127.0.0.1:11434"
+    ragas_judge_model: str = "qwen2.5:7b"
+    ragas_judge_timeout_s: int = 300
 
     embedding_model: str = (
         "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
@@ -34,7 +51,7 @@ class Settings(BaseSettings):
     embedding_device: str = "cpu"
     hf_home: Path = PROJECT_ROOT / ".cache" / "huggingface"
 
-    base_docs_dir: Path = PROJECT_ROOT / "2_base_documental"
+    base_docs_dir: Path = PROJECT_ROOT / "base_documental"
     chroma_dir: Path = PROJECT_ROOT / "data" / "chroma"
     ecopontos_data_path: Path = PROJECT_ROOT / "data" / "ecopontos.json"
     evaluation_dataset_path: Path = (
@@ -62,6 +79,23 @@ class Settings(BaseSettings):
             self.ollama_api_key
             and self.ollama_api_key.get_secret_value().strip()
         )
+
+    @property
+    def has_ragas_judge_credentials(self) -> bool:
+        return bool(
+            self.ragas_judge_api_key
+            and self.ragas_judge_api_key.get_secret_value().strip()
+        )
+
+    @property
+    def uses_local_ollama(self) -> bool:
+        """Indica se o Ollama principal roda localmente."""
+        return is_local_ollama_url(self.ollama_base_url)
+
+    @property
+    def uses_local_ragas_judge(self) -> bool:
+        """Indica se o Ollama juiz do RAGAS roda localmente."""
+        return is_local_ollama_url(self.ragas_judge_base_url)
 
 
 @lru_cache

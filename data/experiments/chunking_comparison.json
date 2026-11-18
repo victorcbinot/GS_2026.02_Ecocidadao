@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "parcialmente_executado",
-  "generated_at": "2026-11-15T06:18:36Z",
+  "generated_at": "2026-11-18T02:32:44Z",
   "dataset": {
     "source": "src\\ecocidadao\\evaluation\\dataset.json",
     "question_count": 8,
@@ -27,6 +27,8 @@
   },
   "winner": null,
   "winner_reason": "Nenhuma estrategia foi declarada vencedora: o retrieval foi medido, mas as metricas RAGAS de contexto e a validacao humana dos ground truths ainda estao pendentes.",
+  "recommended_strategy": "markdown",
+  "recommendation_reason": "Recomendacao tecnica baseada nos dados de retrieval: as duas estrategias empatam em Hit@3, Hit@5 e MRR; a Markdown tem precision documental maior (0.80 contra 0.725), chunks menores e preserva a hierarquia de secoes. O recall documental e menor (0.875 contra 1.0) em duas armadilhas, o que deve ser monitorado com a janela temporal ampliada. Nao e um vencedor estatistico definitivo sem RAGAS por estrategia.",
   "ragas_status": "pendente",
   "ragas_reason": "As metricas RAGAS context_precision e context_recall dependem de um modelo de linguagem. A comparacao de chunking mediu apenas o retrieval; as metricas RAGAS permanecem pendentes.",
   "strategies": [

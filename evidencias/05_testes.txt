@@ -1,0 +1,16 @@
+TESTES AUTOMATIZADOS — ECOCIDADÃO
+
+Comando executado:
+python -m unittest discover -s tests -q
+
+Resultado: OK
+Testes executados: 152
+Falhas: 0
+Erros: 0
+Tempo aproximado: 7,0 segundos
+Ambiente: Python 3.14.3, Windows
+
+Observação: o Gradio emite avisos de event loop não fechado durante os testes
+de interface. Esses avisos não representam falha nos testes.
+
+Conclusão: a suíte completa passou após as alterações finais do projeto.

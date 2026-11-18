@@ -22,7 +22,7 @@ STARTUP_ERROR_MESSAGE = (
 PROCESSING_ERROR_MESSAGE = (
     "Não foi possível concluir a solicitação neste momento. "
     "Tente novamente. Se o problema continuar, verifique a conexão com o "
-    "Ollama Cloud e a disponibilidade do banco vetorial."
+    "Ollama local e a disponibilidade do banco vetorial."
 )
 
 INITIAL_STATUS = "**Status:** pronto para receber uma pergunta."

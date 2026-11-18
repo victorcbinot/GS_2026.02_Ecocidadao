@@ -1,15 +1,43 @@
-EcoCidadao - Global Solution 2026.2
-ARQUIVO: certificacao.txt
-STATUS: PENDENTE
+CERTIFICAÇÃO — GLOBAL SOLUTION 2026.2
 
-A certificacao do projeto ainda nao foi emitida ou validada.
+1. IDENTIFICAÇÃO DO PROJETO
 
-Preencher este arquivo somente com dados reais, por exemplo:
-- nome completo dos integrantes;
-- curso, turma e instituicao;
-- nome do projeto e data de entrega;
-- nome do professor ou responsavel pela validacao;
-- carga horaria ou atividade certificada, se aplicavel;
-- link ou identificador do certificado, se existir.
+Projeto: EcoCidadão
+Frente: B — Descarte e Sustentabilidade
+Disciplina: Prompt and Artificial Intelligence
+Instituição: FIAP
+Turma: [PENDENTE]
 
-Nao inserir certificado, assinatura, carga horaria ou instituicao ficticios.
+2. INTEGRANTES DO GRUPO
+
+Integrante: Felipe de Oliveira Doern
+RM: 568798
+
+Integrante: Miguel Marcelo Alves Ramos de Oliveira
+RM: 569467
+
+Integrante: Victor Correia Binot
+RM: 571499
+
+3. LINKS DA ENTREGA
+
+Repositório GitHub: https://github.com/victorcbinot/GS_2026.02_Ecocidadao
+Vídeo de demonstração: [PENDENTE — vídeo ainda não gravado]
+
+4. TELA FINAL DO PROJETO
+
+Evidência: evidencias/04c_interface_gradio_rag_fontes.png
+
+A captura apresenta a interface final do EcoCidadão em funcionamento,
+demonstrando a interação com o assistente e sua orientação sobre descarte
+correto de resíduos.
+
+Nota de transparência: a captura é real, mas foi gerada com o modelo local
+qwen2.5:7b como contingência, porque a Ollama Cloud retornou HTTP 402 por falta
+de créditos para o gpt-oss:20b.
+
+5. DECLARAÇÃO DE ENTREGA
+
+Declaramos que este material corresponde ao projeto EcoCidadão, desenvolvido
+em grupo para a Global Solution 2026.2, seguindo as orientações da atividade
+acadêmica.

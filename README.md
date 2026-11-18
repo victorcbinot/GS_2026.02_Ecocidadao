@@ -1,45 +1,56 @@
 # EcoCidadão
 
-Assistente municipal inteligente para orientar cidadãos sobre descarte
-correto de resíduos, materiais aceitos e proibidos e utilização de
-Ecopontos.
+Assistente municipal inteligente para orientar cidadãos sobre descarte correto
+de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
 
-> **Aviso:** EcoCidade é um município fictício. Todos os documentos,
-> endereços, horários, limites e comunicados do projeto são simulados e
-> não representam dados reais de nenhum município.
+> **Aviso:** EcoCidade é um município fictício. Todos os documentos, endereços,
+> horários, limites e comunicados são simulados e não representam dados reais
+> de nenhum município.
+
+## Status atual
+
+- Pipeline RAG, agente com ferramentas, guardrails e interface Gradio
+  implementados.
+- **152 testes automatizados passando**.
+- Avaliação RAGAS real registrada em `avaliacao_ragas.json`.
+- Comparação de chunking medida em
+  `data/experiments/chunking_comparison.json`.
+- O agente principal está configurado para `gpt-oss:20b` na Ollama Cloud e o
+  juiz RAGAS para `qwen2.5:7b` local, com embeddings locais.
+- A conta da Ollama Cloud continua retornando **HTTP 402** por falta de
+  créditos. Por isso, a validação visual e as interações do chat log usaram o
+  `qwen2.5:7b` local como contingência. Isso está identificado em
+  `evidencias/` e `Chat_Log.txt`; nenhum resultado foi inventado.
+- Os oito ground truths continuam marcados como `pendente_validacao_humana`.
+- Nomes e RMs dos três integrantes preenchidos; certificação, turma/instituição
+  e vídeo continuam pendentes.
+
+## Integrantes
+
+- Felipe de Oliveira Doern — RM 568798
+- Miguel Marcelo Alves Ramos de Oliveira — RM 569467
+- Victor Correia Binot — RM 571499
 
 ## Objetivo
 
-O EcoCidadão é um assistente conversacional para orientar a população de
-EcoCidade sobre o descarte correto de resíduos. O projeto busca:
+O EcoCidadão orienta a população de EcoCidade sobre:
 
-- responder perguntas sobre materiais aceitos, proibidos e locais de
-  entrega;
-- consultar os Ecopontos e considerar horários, interdições e mudanças
-  temporais;
-- usar evidências documentais e apresentar as fontes consultadas;
-- recusar perguntas fora do escopo e não inventar informações quando a base
-  não sustenta uma resposta;
-- demonstrar, de forma acadêmica, um pipeline completo de RAG com
-  ferramentas, guardrails, avaliação e interface local.
+- materiais aceitos, proibidos e locais de entrega;
+- horários, interdições e mudanças temporais dos Ecopontos;
+- evidências documentais com fontes citadas;
+- recusa segura de perguntas fora do escopo ou sem contexto;
+- demonstração acadêmica de um pipeline completo de RAG com ferramentas,
+  guardrails, avaliação e interface local.
 
 ## Problema
 
-As informações de descarte de EcoCidade estão distribuídas em documentos
-com datas e finalidades diferentes. Em especial, a lista de Ecopontos, o
-regulamento de descarte e o comunicado de interdição do Parque das Acácias
-não podem ser tratados como se valessem ao mesmo tempo. O sistema precisa
-identificar a data de referência da pergunta, priorizar o comunicado mais
-recente e não aplicar uma regra antes da sua vigência.
+As informações estão distribuídas em três documentos com datas e finalidades
+diferentes. A lista de Ecopontos, o regulamento de descarte e o comunicado de
+interdição do Parque das Acácias não podem ser tratados como se valessem ao
+mesmo tempo. O sistema precisa identificar a data de referência, priorizar o
+comunicado mais recente e não aplicar uma regra antes da sua vigência.
 
-Além disso, o cidadão pode fazer perguntas incompletas, usar termos
-informais, combinar consultas documentais com cálculos ou tentar induzir o
-modelo a ignorar as instruções. O projeto trata esses casos com ferramentas,
-guardrails, citações e respostas seguras.
-
-## Solução e arquitetura
-
-O fluxo principal é:
+## Arquitetura
 
 ```text
 Pergunta do cidadão
@@ -54,591 +65,345 @@ Pergunta do cidadão
   -> interface Gradio ou CLI
 ```
 
-A base documental é carregada de `2_base_documental/`, validada e dividida
-em chunks por duas estratégias. Os chunks são indexados em coleções
-independentes do ChromaDB com embeddings gerados localmente. O serviço RAG
-recupera os trechos mais relevantes, monta um contexto delimitado e cita as
-fontes. O agente decide quando usar cada ferramenta e o limite de seis
-chamadas evita ciclos improdutivos. A interface Gradio mantém o histórico
-da sessão e exibe as fontes de cada resposta.
+A base documental é carregada de `base_documental/`, validada e dividida em
+chunks por duas estratégias. Os chunks são indexados em coleções independentes
+do ChromaDB com embeddings locais. O serviço RAG recupera os trechos mais
+relevantes, monta um contexto delimitado e cita as fontes. O agente decide
+quando usar cada ferramenta e o limite de seis chamadas evita ciclos
+improdutivos.
 
-## Contexto acadêmico
+## Modelos e separação de papéis
 
-- Global Solution 2026.2 — FIAP.
-- Frente B — Descarte e sustentabilidade.
-- Desenvolvimento em trio.
-- Execução local no Windows, com PyCharm e terminal.
-- Projeto implementado apenas em módulos `.py`.
+| Papel | Configuração atual | Execução |
+|---|---|---|
+| Agente principal | `gpt-oss:20b` | Ollama Cloud (`https://ollama.com`) |
+| Juiz RAGAS | `qwen2.5:7b` | Ollama local (`http://127.0.0.1:11434`) |
+| Embeddings | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | Local, CPU |
+| ChromaDB | `1.5.9` | Local |
 
-## Integrantes
+O agente e o juiz têm variáveis independentes (`OLLAMA_*` e `RAGAS_JUDGE_*`).
+O juiz local não exige chave. A chave do agente é lida como `SecretStr` e não é
+exibida em logs nem na interface.
 
-- [preencher nome 1]
-- [preencher nome 2]
-- [preencher nome 3]
-
-## Status atual
-
-**Etapas 1 a 7 implementadas e 151 testes automatizados passando. A
-avaliação RAGAS real está pendente porque o Ollama Cloud continua retornando
-HTTP 402 por falta de créditos. A entrega final ainda depende do preenchimento
-dos dados humanos e da geração do vídeo.**
-
-- Etapa 1: estrutura de pastas, configuração central, dependências,
-  ponto de entrada e documentação.
-- Etapa 2: três documentos autorais da base, carga com validação de
-  metadados, duas estratégias de chunking e indexação local no ChromaDB
-  com testes automatizados.
-- Etapa 3: serviço RAG com LCEL, recuperação por similaridade, citações,
-  recusa sem evidência e tratamento de temporalidade.
-- Etapa 4: guardrails de escopo, prompt injection, LGPD, contexto
-  insuficiente e validação de saída, integrados ao serviço RAG.
-- Etapa 5: ferramentas de consulta documental, Ecopontos, calculadora e
-  data atual; agente com tool calling, limite de chamadas e tratamento de
-  erros.
-- Etapa 6: interface Gradio com histórico por sessão, fontes por resposta,
-  status de guardrails e mensagens amigáveis para falhas de conexão e do
-  banco vetorial.
-- Etapa 7: dataset de avaliação com oito perguntas, runner RAGAS, resultado
-  pendente documentado e comparação medida de chunking por retrieval.
-
-A validação com o Ollama Cloud está bloqueada temporariamente por falta
-de créditos na conta (HTTP 402). O serviço, o agente, a interface e os
-testes com LLM simulado estão funcionando. A avaliação RAGAS real vai gerar
-respostas e métricas quando houver créditos; nenhum valor foi inventado.
-
-## Tecnologias utilizadas
-
-- Python 3.14.3 no ambiente validado, com compatibilidade pretendida para
-  Python 3.12 ou superior.
-- LangChain Core, LangChain Text Splitters e LangChain Ollama; LCEL para a
-  composição do pipeline.
-- `ChatOllama` com Ollama Cloud.
-- Embeddings locais com `sentence-transformers` e o modelo
-  `paraphrase-multilingual-MiniLM-L12-v2`.
-- ChromaDB com persistência local e duas coleções independentes.
-- Gradio 6.32 para a interface local; o código mantém compatibilidade
-  com a API de mensagens do Gradio 5.
-- RAGAS 0.4.4, `datasets` e `pandas` para a avaliação.
-- pydantic-settings com python-dotenv para configuração e `.env`.
-- PyYAML para leitura do front matter dos documentos.
-- `unittest` para os 151 testes automatizados.
+> A execução RAGAS preservada em `avaliacao_ragas.json` usou o
+> `qwen2.5:7b` local como **gerador das respostas e como juiz**, porque a
+> Ollama Cloud estava sem créditos. O JSON registra essa configuração. A
+> configuração-alvo com GPT-OSS 20B gerando respostas não pôde ser executada.
 
 ## Estrutura do projeto
 
 ```text
 GS_2026.02_Ecocidadao/
-├── 2_base_documental/          # documentos da base de conhecimento
-├── avaliacao_ragas.json        # avaliação real ou pendência documentada
-├── README.md                   # este arquivo
-├── certificacao.txt            # pendente de definição
-├── Chat_log.txt                # pendente de definição
-├── demo_video_url.txt          # pendente de gravação
-├── app.py                      # ponto de entrada da aplicação
-├── requirements.txt            # dependências do projeto
+├── base_documental/          # três documentos da base
+├── avaliacao_ragas.json      # resultado RAGAS real preservado
+├── certificacao.txt          # nomes/RMs preenchidos; certificação pendente
+├── Chat_Log.txt              # interações reais de validação local
+├── demo_video_url.txt        # URL do vídeo pendente
+├── app.py                      # ponto de entrada da interface
+├── requirements.txt            # dependências com versões fixadas
 ├── .env.example                # modelo de variáveis de ambiente
-├── .gitignore
+├── evidencias/                 # capturas e logs reais
+├── docs/
+│   ├── AVALIACAO_RAGAS.md
+│   ├── COMPARACAO_CHUNKING.md
+│   ├── CONCLUSAO.md
+│   └── REVISAO_GROUND_TRUTHS.md
 ├── src/ecocidadao/
-│   ├── config.py               # configurações centralizadas
-│   ├── ingestion/              # carga e chunking dos documentos
-│   ├── rag/                    # recuperação e pipeline LCEL
-│   ├── agent/                  # agente e ferramentas
-│   ├── guardrails/             # validações de segurança
-│   ├── evaluation/             # avaliação RAGAS
-│   └── ui/                     # interface Gradio
-├── scripts/                    # comandos de ingestão e avaliação
-├── tests/                      # testes automatizados
-├── data/
-│   ├── ecopontos.json          # dados estruturados dos Ecopontos
-│   ├── chunks/                 # chunks gerados (ignorados pelo Git)
-│   ├── chroma/                 # índice gerado localmente
-│   └── experiments/            # resultados da comparação de chunking
-└── docs/                       # notas internas opcionais
+│   ├── config.py
+│   ├── ingestion/
+│   ├── rag/
+│   ├── agent/
+│   ├── guardrails/
+│   ├── evaluation/
+│   └── ui/
+├── scripts/
+├── tests/
+└── data/
+    ├── ecopontos.json
+    ├── chunks/                 # gerado e ignorado pelo Git
+    ├── chroma/                 # gerado e ignorado pelo Git
+    └── experiments/
 ```
 
 ## Pré-requisitos
 
-- Windows.
-- PyCharm.
-- Python 3.12 (recomendado) ou superior.
-- Acesso ao Ollama Cloud, uma chave de API e créditos disponíveis.
-
-**Atenção:** o ambiente local atual utiliza Python 3.14.3. As dependências
-de embeddings e banco vetorial (`sentence-transformers`, `torch` e
-`chromadb`) foram instaladas e validadas nesse ambiente, mas o
-`requirements.txt` mantém compatibilidade com Python 3.12. A interface
-`gradio` 6.32, o `ragas` 0.4.4 e o `datasets` 5.2.0 também foram
-instalados e validados. O `scikit-network`, dependência opcional usada
-apenas na geração de testset do RAGAS, não tem wheel recente para Python
-3.14; por isso o `requirements.txt` fixa a versão pura 0.12.1 nesse
-interpretador. As métricas usadas nesta avaliação não dependem dessa
-biblioteca. Caso alguma dependência não ofereça suporte, recomenda-se
-criar o ambiente virtual com Python 3.11 ou 3.12. Nenhuma configuração
-global do computador deve ser alterada.
+- Windows com PowerShell.
+- Python 3.14.3 no ambiente validado; o código mantém compatibilidade
+  pretendida com Python 3.12+.
+- Ollama local para o juiz RAGAS e para a contingência de validação.
+- Opcional: chave e créditos da Ollama Cloud para o agente `gpt-oss:20b`.
 
 ## Instalação
-
-No terminal do PyCharm, na raiz do projeto:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
-```
-
-Crie o arquivo de variáveis de ambiente:
-
-```powershell
 Copy-Item .env.example .env
 ```
 
-Depois preencha `OLLAMA_API_KEY` e `OLLAMA_MODEL` no `.env`. O arquivo
-`.env` não deve ser versionado.
+Preencha o `.env` conforme o modo de execução. O `.env` é ignorado pelo Git.
 
-O `requirements.txt` utiliza faixas de versão compatíveis com Python
-3.12. O ambiente local validado usa Python 3.14.3 com as dependências
-instaladas em `.venv/`; o marcador de ambiente seleciona a versão de
-`scikit-network` adequada a cada interpretador.
+## Configuração
 
-## Configuração do Ollama Cloud
-
-Depois de criar o `.env`, preencha:
+### Modo local (sem custo de API)
 
 ```dotenv
-OLLAMA_API_KEY=sua_chave
-OLLAMA_BASE_URL=https://ollama.com
-OLLAMA_MODEL=modelo_disponivel_na_sua_conta
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+OLLAMA_MODEL=qwen2.5:7b
+OLLAMA_API_KEY=
+
+RAGAS_JUDGE_BASE_URL=http://127.0.0.1:11434
+RAGAS_JUDGE_MODEL=qwen2.5:7b
+RAGAS_JUDGE_API_KEY=
+RAGAS_JUDGE_TIMEOUT_S=600
 ```
 
-A chave é lida por `pydantic-settings` como `SecretStr`, não é exibida nos
-logs nem na interface e não deve ser versionada. O modelo precisa oferecer
-suporte a tool calling para o agente funcionar com todas as ferramentas.
-Sem chave, o CLI e a interface retornam uma mensagem de configuração; com a
-conta sem créditos, a chamada real retorna HTTP 402 e o projeto registra a
-pendência em vez de inventar respostas ou métricas.
+### Agente na Ollama Cloud
+
+```dotenv
+OLLAMA_BASE_URL=https://ollama.com
+OLLAMA_MODEL=gpt-oss:20b
+OLLAMA_API_KEY=sua_chave_real
+```
+
+O juiz pode continuar local:
+
+```dotenv
+RAGAS_JUDGE_BASE_URL=http://127.0.0.1:11434
+RAGAS_JUDGE_MODEL=qwen2.5:7b
+```
+
+Sem créditos, a chamada ao agente retorna HTTP 402 e a interface mostra uma
+mensagem controlada. Não há compra automática de créditos.
 
 ## Execução
 
-Com o ambiente virtual ativado e a base vetorial já ingerida, inicie a
-interface:
-
-```powershell
-python app.py
-```
-
-O Gradio abre a interface em `http://127.0.0.1:7860` por padrão. O endereço
-e a porta podem ser alterados por `GRADIO_SERVER_NAME` e
-`GRADIO_SERVER_PORT`. A interface permite digitar perguntas, manter o
-histórico da sessão, limpar a conversa e consultar as fontes documentais de
-cada resposta.
-
-Se a conta do Ollama Cloud estiver sem créditos ou o banco vetorial não
-estiver disponível, a interface mostra uma mensagem explicativa em vez de
-expor detalhes internos. Os logs e a interface não exibem chaves, tokens
-ou outros dados sensíveis.
-
-## Ingestão e chunking
-
-Os documentos de `2_base_documental/` são carregados com validação de
-front matter YAML, metadados obrigatórios, data ISO e tamanho mínimo de
-100 palavras. Em seguida, o script gera os chunks nas duas estratégias:
+### 1. Gerar chunks
 
 ```powershell
 python scripts/ingest.py
 ```
 
-Saídas em `data/chunks/` (ignoradas pelo Git):
+Saídas em `data/chunks/`:
 
-- `chunks_fixo.jsonl`: estratégia A, divisão fixa com 800 caracteres e
-  150 de sobreposição.
-- `chunks_markdown.jsonl`: estratégia B, divisão por cabeçalhos Markdown,
-  com divisão recursiva de 800 caracteres e 100 de sobreposição quando
-  necessário.
-- `summary.json`: contagem e estatísticas de tamanho por documento e
-  estratégia.
+- `chunks_fixo.jsonl` — 800 caracteres, 150 de sobreposição;
+- `chunks_markdown.jsonl` — cabeçalhos Markdown, 800 caracteres, 100 de
+  sobreposição;
+- `summary.json`.
 
-Cada chunk possui ID determinístico no formato
-`{doc_id}::{estrategia}::{indice}`, metadados do documento e, na
-estratégia Markdown, a hierarquia de seções (`section_h1`, `section_h2`,
-`section_h3`, `section_path` e `section_level`).
-
-Testes automatizados:
-
-```powershell
-python -m unittest discover -s tests -v
-```
-
-## Indexação no ChromaDB
-
-Os embeddings são gerados localmente com o modelo multilíngue
-`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, sem enviar
-os documentos para serviços externos. O modelo é baixado no primeiro uso
-para `.cache/huggingface/`, pasta ignorada pelo Git. O cliente ChromaDB é
-inicializado com telemetria anônima desativada.
+### 2. Indexar no ChromaDB
 
 ```powershell
 python scripts/index_chroma.py --recreate
 ```
 
-O comando cria ou atualiza duas coleções independentes em `data/chroma/`
-(pasta ignorada pelo Git):
+Coleções: `ecocidadao_fixo` e `ecocidadao_markdown`.
 
-- `ecocidadao_fixo`: chunks da estratégia de divisão fixa.
-- `ecocidadao_markdown`: chunks da estratégia por cabeçalhos Markdown.
-
-Cada coleção preserva os IDs determinísticos dos chunks, o texto e os
-metadados originais. Os metadados completos são serializados em JSON
-para manter listas e valores nulos que o ChromaDB não aceita diretamente.
-Execuções repetidas usam `upsert` e removem chunks obsoletos, evitando
-duplicação. Para indexar apenas uma estratégia, use
-`--strategy fixo` ou `--strategy markdown`.
-
-O módulo `src/ecocidadao/rag/vector_store.py` expõe funções para criar ou
-atualizar índices, carregar uma coleção existente e consultar por
-similaridade, retornando texto, metadados, distância e similaridade.
-
-Validação local: `chromadb` 1.5.9, `sentence-transformers` 5.7.0 e
-`torch` 2.15.0. As faixas do `requirements.txt` mantêm suporte a Python
-3.12.
-
-## Serviço RAG
-
-O serviço em `src/ecocidadao/rag/service.py` recupera trechos da coleção
-escolhida, monta um contexto com metadados e citações `[F1]`, `[F2]` etc.
-e envia a pergunta ao modelo configurado no Ollama Cloud. A resposta
-inclui as fontes efetivamente citadas e o contexto utilizado.
+### 3. Consultar o RAG
 
 ```powershell
 python scripts/ask_rag.py "Onde devo descartar medicamentos vencidos?" --collection ecocidadao_markdown --as-of 2026-06-10
 ```
 
-Parâmetros disponíveis:
+### 4. Consultar o agente
 
-- `--collection`: `ecocidadao_fixo` ou `ecocidadao_markdown` (padrão do
-  `.env`).
-- `--top-k`: quantidade de trechos recuperados.
-- `--as-of`: data de referência no formato `AAAA-MM-DD`.
+```powershell
+python scripts/ask_agent.py "Em 20/04/2026, o Parque das Acácias aceita pilhas? Para onde levar?" --as-of 2026-04-20
+```
 
-Comportamento implementado:
+O agente limita a execução a no máximo **6 chamadas de ferramentas** por
+pergunta e detecta chamadas repetidas.
 
-- citações documentais com título, data de publicação, seção e arquivo;
-- distinção entre informação documental, inferência e ausência de
-  evidência no prompt;
-- recusa determinística, sem chamar o LLM, quando nenhum trecho supera o
-  limiar de relevância;
-- regras temporais explícitas para não misturar documentos antigos e
-  novos, não aplicar mudanças antes da vigência e não usar documento
-  publicado depois da data da pergunta como regra vigente;
-- ampliação automática da janela de recuperação para perguntas temporais
-  (`TEMPORAL_TOP_K = 10`), garantindo que regras históricas e novas
-  apareçam juntas no contexto;
-- encapsulamento de falhas do modelo em `RagServiceError`, com mensagem
-  clara no CLI.
+### 5. Abrir a interface
 
-A recente consulta real retornou HTTP 402 do Ollama Cloud por falta de
-créditos. O tratamento do erro já está implementado; a resposta real do
-modelo permanece pendente de validação.
+```powershell
+python app.py
+```
 
-## Guardrails
+A interface abre em `http://127.0.0.1:7860` por padrão.
 
-O `GuardrailEngine` em `src/ecocidadao/guardrails/engine.py` é aplicado
-dentro de `RagService.ask`, antes e depois da chamada ao modelo:
-
-1. validação da pergunta;
-2. recuperação dos trechos;
-3. sanitização do contexto documental;
-4. chamada ao LLM;
-5. validação da resposta e fallback seguro.
-
-Comportamentos implementados:
-
-- **Escopo:** perguntas claramente fora de descarte, reciclagem,
-  sustentabilidade municipal e Ecopontos são recusadas sem chamar o LLM.
-  A classificação usa pontuação ponderada e âncoras de domínio, evitando
-  bloqueio simplista por palavra isolada. Perguntas legítimas que apenas
-  mencionam regras continuam permitidas.
-- **Prompt injection:** comandos para ignorar instruções, mudar o papel
-  do assistente, revelar o prompt ou fabricar evidências são bloqueados
-  na entrada. Instruções encontradas nos documentos são removidas antes
-  de compor o prompt, com o marcador
-  `[conteúdo instrucional não confiável removido por segurança]`.
-- **Contexto não confiável:** o prompt delimita os trechos entre
-  `<contexto_documental_nao_confiavel>` e
-  `</contexto_documental_nao_confiavel>` e orienta o modelo a não
-  obedecer comandos presentes neles.
-- **LGPD:** pedidos de dados pessoais de terceiros são recusados. CPF,
-  telefone, e-mail e padrões sensíveis são redigidos na pergunta, no
-  contexto e na resposta. Contatos institucionais, como o telefone da
-  Secretaria de Meio Ambiente, continuam permitidos.
-- **Contexto insuficiente:** quando não há trecho acima do limiar, o
-  serviço responde de forma determinística, sem chamar o LLM, e orienta
-  o cidadão a procurar a Secretaria Municipal de Meio Ambiente ou o
-  Ecoponto mais próximo.
-- **Validação de saída:** citações inexistentes são removidas, respostas
-  factuais sem citação válida não são apresentadas como fato, saídas fora
-  de escopo ou com tentativa de revelar instruções são bloqueadas e dados
-  pessoais são redigidos. Em qualquer falha, aplica-se uma resposta
-  segura padronizada.
-- **Rastreabilidade:** `RagResponse` expõe `guardrail_events` e
-  `blocked_by_guardrail` para auditoria e testes.
-
-Os guardrails são heurísticos e complementam, mas não substituem, a
-validação humana e a resposta real do modelo. A suíte completa está em
-**151 testes automatizados**:
+### 6. Rodar os testes
 
 ```powershell
 python -m unittest discover -s tests -v
+python -m compileall src scripts tests app.py
+python -m pip check
 ```
 
-## Ferramentas e agente
+## Ingestão e chunking
 
-O agente em `src/ecocidadao/agent/agent.py` usa `ChatOllama` com suporte
-a tool calling e um loop próprio de execução, o que permite controlar o
-limite e os ciclos com precisão.
+A ingestão valida front matter YAML, metadados obrigatórios, data ISO e tamanho
+mínimo de 100 palavras. Cada chunk tem ID determinístico no formato
+`{doc_id}::{estrategia}::{indice}`. A estratégia Markdown preserva
+`section_h1`, `section_h2`, `section_h3`, `section_path` e `section_level`.
 
-Ferramentas disponíveis:
+### Comparação medida
 
-- `consultar_base_documental`: consulta o `RagService` e retorna resposta,
-  contexto e fontes com citações `[F1]`, `[F2]` etc. Os guardrails do RAG
-  são aplicados antes de o resultado chegar ao agente.
-- `consultar_ecopontos`: lê `data/ecopontos.json` e consulta endereço,
-  horário, materiais aceitos e situação de funcionamento. Considera a
-  interdição do Parque das Acácias entre 15/03/2026 e 31/05/2026 e as
-  mudanças permanentes a partir de 01/06/2026, incluindo o novo horário e
-  a retirada de pilhas e baterias.
-- `calcular`: calculadora baseada em AST, sem `eval()` nem execução
-  arbitrária. Aceita operadores e funções seguras, valida limites e
-  identifica o resultado como estimativa calculada, não como dado
-  oficial.
-- `data_atual`: retorna a data atual em ISO para interpretar vigências e
-  reaberturas.
+Execução real: `python scripts/compare_chunking.py`.
 
-Comportamentos do agente:
+| Estratégia | Chunks | Média de caracteres | Hit@3 | Hit@5 | MRR | Precision documental | Recall documental |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Fixo | 17 | 607,00 | 1,0000 | 1,0000 | 1,0000 | 0,7250 | 1,0000 |
+| Markdown | 22 | 453,77 | 1,0000 | 1,0000 | 1,0000 | 0,8000 | 0,8750 |
 
-- decide quando chamar cada ferramenta e pode combiná-las;
-- limita a execução a no máximo **6 chamadas de ferramentas** por
-  pergunta;
-- detecta chamadas repetidas pela assinatura da ferramenta e dos
-  argumentos, interrompendo ciclos desnecessários;
-- converte falhas de ferramentas em mensagens controladas e continua o
-  fluxo quando possível;
-- informa limitação quando o modelo, a ferramenta ou o contexto não
-  permitem responder com segurança;
-- aplica guardrails na entrada e na saída e preserva as citações
-  documentais, acrescentando as fontes consultadas quando necessário;
-- diferencia resposta documental, dado estruturado dos Ecopontos e
-  resultado calculado.
+**Decisão recomendada: Markdown.** Empata em Hit@3, Hit@5 e MRR, tem precisão
+documental maior, chunks menores e preserva a hierarquia de seções. A ressalva
+é o recall documental menor em duas armadilhas de pilhas; perguntas temporais
+usam janela ampliada (`TEMPORAL_TOP_K=10`) para mitigar. O JSON mantém
+`winner=null` porque não houve RAGAS por estratégia, mas registra
+`recommended_strategy=markdown`; a recomendação é uma decisão de engenharia
+baseada nos dados de retrieval. Detalhes em `docs/COMPARACAO_CHUNKING.md`.
 
-Exemplo de uso:
+## Avaliação RAGAS
 
-```powershell
-python scripts/ask_agent.py "O Parque das Acácias aceita pilhas em 10/06/2026? Se eu levar 3 caixas de 5 kg, quanto é o total?" --as-of 2026-06-10
-```
+O dataset em `src/ecocidadao/evaluation/dataset.json` tem exatamente oito
+perguntas: quatro simples e quatro de armadilha. A revisão técnica está em
+`docs/REVISAO_GROUND_TRUTHS.md`; todos os ground truths continuam
+`pendente_validacao_humana`.
 
-A validação real do agente com o Ollama Cloud continua bloqueada pelo
-HTTP 402. Os testes usam LLM simulado e cobrem as ferramentas, o limite
-de chamadas, a repetição e os erros controlados.
+Resultados reais preservados em `avaliacao_ragas.json`:
 
-## Interface Gradio
+| Métrica | Resultado |
+|---|---:|
+| Faithfulness | 0,570833 |
+| Answer relevancy | 0,180817 |
+| Context precision | 0,520833 |
+| Context recall | 0,937500 |
 
-A interface fica em `src/ecocidadao/ui/` e é iniciada por `app.py`. Ela não
-reimplementa a lógica de negócio: usa `ChatSession` para manter o histórico
-e `EcoCidadaoAgent` para guardrails, ferramentas e respostas.
+Leitura resumida:
 
-- **Histórico:** o `Chatbot` e o estado da sessão preservam as interações
-  durante o uso. O agente recebe até quatro turnos anteriores como contexto
-  delimitado e explicitamente marcados como não instruções.
-- **Proteção do histórico:** turnos anteriores bloqueados por guardrails ou
-  com prompt injection detectado são omitidos do contexto. A pergunta atual
-  continua passando pelo `GuardrailEngine` antes de qualquer chamada ao
-  modelo.
-- **Fontes por resposta:** as fontes documentais aparecem na própria
-  mensagem do assistente e em um painel lateral com documento, data, seção
-  e arquivo. Ferramentas usadas são listadas sem expor argumentos ou
-  resultados internos.
-- **Status visual:** respostas concluídas, recusas de guardrail, contexto
-  insuficiente, limite de ferramentas, repetição e falhas de conexão têm
-  títulos e avisos distintos.
-- **Falhas compreensíveis:** erros do Ollama Cloud, do ChromaDB, da base
-  documental ou de `data/ecopontos.json` são convertidos em mensagens
-  orientativas, sem chaves, tokens, traces ou detalhes sensíveis.
-- **Sessão:** o botão “Limpar conversa” apaga o histórico e reinicia o
-  estado da sessão.
+- a recuperação cobre bem os documentos na maioria das perguntas;
+- a precisão do contexto é mediana, com chunks irrelevantes no topo;
+- as respostas são prolixas e pouco aderentes, derrubando
+  `answer_relevancy`;
+- duas perguntas de armadilha ficaram sem contexto exposto e receberam
+  `context_recall=1,0`, um resultado anômalo que não deve ser lido como
+  cobertura real;
+- o `qwen2.5:7b` local foi gerador e juiz nessa execução; a configuração-alvo
+  separa GPT-OSS 20B (gerador) e Qwen 2.5 7B (juiz).
 
-## Contradição temporal e detalhe escondido
+Explicação completa, tabela por pergunta e melhorias propostas:
+`docs/AVALIACAO_RAGAS.md`.
 
-A base contém uma contradição proposital entre documentos:
-
-- `lista_ecopontos.md` (fevereiro de 2026) e `regulamento_descarte.md`
-  informam que o Parque das Acácias aceita pilhas e baterias;
-- `comunicado_interdicao.md` informa que o Parque fica interditado de
-  **15/03/2026 a 31/05/2026**;
-- a partir de **01/06/2026**, o comunicado retira pilhas e baterias do
-  Parque e altera o horário para segunda a sexta, 08h–17h, e sábado,
-  08h–12h.
-
-A resposta correta depende da data de referência. Em datas dentro da
-interdição, o Parque não deve ser indicado como disponível; após 01/06/2026,
-a informação mais recente prevalece. O serviço RAG recebe `--as-of`, inclui
-essas regras no contexto e a ferramenta `consultar_ecopontos` aplica a mesma
-lógica aos dados estruturados.
-
-O detalhe escondido é o descarte de **medicamentos vencidos**: eles não são
-aceitos nos Ecopontos. O destino correto é a Farmácia Municipal EcoSaúde,
-Rua das Palmeiras, 77, Centro, de segunda a sexta, 08h–17h. Esse conteúdo
-aparece no regulamento e é usado para verificar se o RAG recupera a fonte
-correta em vez de responder apenas com a lista geral de Ecopontos.
-
-## Testes automatizados
-
-A suíte usa `unittest`, não depende de chamadas reais ao Ollama Cloud e cobre
-ingestão, chunking, embeddings, ChromaDB, RAG, temporalidade, guardrails,
-ferramentas, agente, avaliação, CLI e interface:
-
-```powershell
-python -m unittest discover -s tests -v
-```
-
-No estado atual, os **151 testes passam**. Os testes de integração com o
-modelo real não substituem a validação manual quando a conta tiver créditos.
-A validação final também inclui `python -m compileall src scripts tests app.py`
-e `python -m pip check`.
-
-## Avaliação RAGAS e comparação de chunking
-
-O dataset em `src/ecocidadao/evaluation/dataset.json` contém exatamente
-oito perguntas: quatro simples e quatro de armadilha. As perguntas de
-armadilha exigem resolver a interdição do Parque das Acácias, a mudança
-permanente após 1º/06/2026 ou a prevalência do comunicado mais recente
-sobre a lista de fevereiro. Todos os `ground_truth` estão marcados como
-`pendente_validacao_humana`; eles são rascunhos técnicos e não foram
-declarados validados pelos integrantes ou pelo professor.
-
-Avaliação real:
+Para executar novamente quando houver créditos:
 
 ```powershell
 python scripts/evaluate_ragas.py
 ```
 
-O runner recupera contextos, tenta gerar as respostas com o modelo
-configurado e aplica `faithfulness`, `answer_relevancy`,
-`context_precision` e `context_recall`. A saída é
-`avaliacao_ragas.json`, com pergunta, resposta gerada, contextos,
-ground truth e métricas. A execução local atual está registrada como
-`pendente` porque o Ollama Cloud retornou **HTTP 402**; as métricas
-permanecem `null` e o motivo está documentado no arquivo.
+A saída padrão agora é `avaliacao_ragas.json`.
 
-Comparação de chunking:
+## Guardrails
 
-```powershell
-python scripts/compare_chunking.py
-```
+O `GuardrailEngine` é aplicado antes e depois da chamada ao modelo:
 
-A saída é `data/experiments/chunking_comparison.json`. A comparação usa
-as duas estratégias já implementadas, recria índices temporários no
-ChromaDB com os mesmos embeddings locais e mede, por pergunta, Hit@3,
-Hit@5, MRR e métricas documentais de precision/recall. Na execução local:
+- **Escopo:** recusa perguntas fora de descarte, reciclagem, sustentabilidade
+  municipal e Ecopontos sem chamar o LLM.
+- **Prompt injection:** bloqueia comandos para ignorar instruções, mudar papel
+  ou revelar o prompt; instruções encontradas nos documentos são removidas.
+- **LGPD:** recusa dados pessoais de terceiros e redige CPF, telefone, e-mail e
+  padrões sensíveis na pergunta, no contexto e na resposta.
+- **Contexto insuficiente:** resposta determinística, sem LLM, com orientação
+  ao cidadão.
+- **Validação de saída:** remove citações inexistentes, bloqueia resposta
+  factual sem citação válida, saída fora de escopo e tentativa de revelar
+  instruções; aplica fallback seguro.
+- **Rastreabilidade:** `RagResponse` expõe `guardrail_events` e
+  `blocked_by_guardrail`.
 
-| Estratégia | Chunks | Média de caracteres | Hit@3 | Hit@5 | MRR | Precision documental | Recall documental |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| E1 fixo | 17 | 607 | 1,0 | 1,0 | 1,0 | 0,725 | 1,0 |
-| E2 markdown | 22 | 453,77 | 1,0 | 1,0 | 1,0 | 0,800 | 0,875 |
+## Ferramentas e agente
 
-As métricas documentais de precision/recall são proxies calculados a
-partir dos `reference_doc_ids`; não são as métricas RAGAS. As métricas
-RAGAS de contexto continuam pendentes de LLM. Por isso o experimento
-registra `winner = null` e não declara uma estratégia vencedora.
+- `consultar_base_documental`: RAG com citações `[F1]`, `[F2]` etc.
+- `consultar_ecopontos`: endereço, horário, materiais e situação do Ecoponto.
+- `calcular`: calculadora segura com AST, sem `eval()`.
+- `data_atual`: data ISO de referência.
 
-## Variáveis de ambiente
+O agente combina ferramentas, trata erros controlados, preserva citações e
+limita a **6 chamadas** por pergunta. A suíte cobre limite, repetição, erros e
+combinação de ferramentas.
 
-| Variável | Finalidade |
-|---|---|
-| `APP_ENV` | Ambiente da aplicação (`dev`, `test`, `prod`). |
-| `LOG_LEVEL` | Nível de log. |
-| `OLLAMA_API_KEY` | Chave do Ollama Cloud; nunca versionar. |
-| `OLLAMA_BASE_URL` | Endereço da API do Ollama Cloud. |
-| `OLLAMA_MODEL` | Modelo de linguagem a ser utilizado. |
-| `LLM_TEMPERATURE` | Temperatura do modelo. |
-| `LLM_MAX_TOKENS` | Limite de tokens da resposta. |
-| `LLM_TIMEOUT_S` | Timeout das chamadas ao modelo. |
-| `EMBEDDING_MODEL` | Modelo local de embeddings. |
-| `EMBEDDING_DEVICE` | Dispositivo de execução (`cpu` ou `cuda`). |
-| `HF_HOME` | Cache local dos modelos de Hugging Face. |
-| `BASE_DOCS_DIR` | Pasta da base documental. |
-| `CHROMA_DIR` | Pasta persistente do ChromaDB. |
-| `ECOPONTOS_DATA_PATH` | Dados estruturados dos Ecopontos. |
-| `EVALUATION_DATASET_PATH` | Dataset das oito perguntas do RAGAS. |
-| `RAGAS_OUTPUT_PATH` | Arquivo de saída da avaliação real. |
-| `CHUNKING_EXPERIMENT_PATH` | Arquivo da comparação medida de chunking. |
-| `COLLECTION_NAME` | Coleção padrão do ChromaDB. |
-| `RETRIEVAL_TOP_K` | Quantidade de trechos recuperados. |
-| `RETRIEVAL_FETCH_K` | Candidatos avaliados antes do ranking final. |
-| `RETRIEVAL_SCORE_THRESHOLD` | Limiar mínimo de relevância. |
-| `MAX_CONTEXT_CHARS` | Limite de contexto enviado ao modelo. |
-| `MAX_INPUT_CHARS` | Limite de caracteres da pergunta. |
-| `MAX_TOOL_CALLS` | Limite de chamadas de ferramentas (máximo 6). |
-| `GRADIO_SERVER_NAME` | Endereço local da interface. |
-| `GRADIO_SERVER_PORT` | Porta local da interface. |
+## Contradição temporal e detalhe escondido
 
-## Justificativa para a ausência do notebook
+- `lista_ecopontos.md` (01/02/2026) informa que o Parque das Acácias aceita
+  pilhas e baterias.
+- `comunicado_interdicao.md` (10/03/2026) interdita o Parque de 15/03/2026 a
+  31/05/2026, inclusive.
+- A partir de 01/06/2026, o Parque reabre com horário reduzido e deixa de
+  aceitar pilhas e baterias; elas passam a ser exclusivas do Ecoponto
+  Industrial.
+- Medicamentos vencidos não são aceitos em Ecopontos; o destino é a Farmácia
+  Municipal EcoSaúde, Rua das Palmeiras, 77, Centro, segunda a sexta,
+  08:00–17:00.
 
-O professor autorizou expressamente a execução local do projeto e a
-retirada do arquivo `.ipynb` da entrega, desde que o motivo fosse
-documentado. Por esse motivo:
+## Evidências
 
-- todo o projeto é implementado em módulos Python (`.py`);
-- não há notebook Jupyter na entrega;
-- não são utilizadas dependências de Jupyter;
-- não é utilizado Google Colab;
-- a execução, os testes e a avaliação são feitos localmente no PyCharm;
-- este README documenta a instalação, a execução e a organização do
-  projeto.
+A pasta `evidencias/` contém registros reais:
+
+- `04b_interface_gradio_consulta.png` — agente usando `consultar_ecopontos`.
+- `04c_interface_gradio_rag_fontes.png` — consulta RAG com fontes e citação.
+- `04d_interface_gradio_guardrail.png` — recusa de escopo pelo guardrail.
+- `01_rag_consulta.txt`, `02_agente_ferramentas.txt`,
+  `02b_agente_ferramentas_combinadas.txt`,
+  `03_guardrail_escopo.txt`, `03b_guardrail_injection.txt`,
+  `03c_guardrail_lgpd.txt` e `06_comparacao_chunking.txt` — logs reais.
+- `05_testes.txt` — saída da suíte completa (152 testes).
+- `07_configuracao_modelos.txt` — separação dos modelos, embeddings locais e
+  limite de 6 ferramentas.
+
+As capturas de interface foram feitas com o modelo local `qwen2.5:7b` porque
+a Ollama Cloud retornou HTTP 402. Não há prints fictícios. Detalhes e comandos
+em `evidencias/00_LEIA-ME.md`.
+
+## Custo estimado por pergunta
+
+| Modo | Custo direto de API | Observação |
+|---|---:|---|
+| Tudo local (agente, juiz e embeddings) | R$ 0,00 | Sem chamadas de nuvem. |
+| Agente Cloud + juiz/embeddings locais | Não medido | A conta retornou HTTP 402; nenhum crédito foi consumido. |
+| Agente Cloud com créditos | Depende da tarifa vigente | Estimar com `(tokens de entrada + saída) × tarifa`; o projeto não coleta tokens. |
+
+Não foi inventado valor de tarifa. O custo local é zero em termos de API; custo
+de energia e hardware não foi medido.
 
 ## Limitações
 
-- A base é acadêmica e fictícia, com apenas três documentos e um arquivo de
-  Ecopontos; não é uma base oficial de município real.
-- A avaliação RAGAS real, as respostas reais do agente e a validação manual
-  da interface continuam bloqueadas pelo HTTP 402 do Ollama Cloud.
-- Os oito `ground_truth` do dataset são rascunhos técnicos e ainda não foram
-  validados por uma pessoa.
-- Os guardrails são heurísticos: reduzem risco, mas não substituem revisão
-  humana, moderação ou uma política de segurança mais ampla.
-- O `scikit-network` não tem wheel recente para Python 3.14; ele é usado
-  apenas na geração de testset do RAGAS, não nas métricas executadas.
-- O projeto não consulta sites, APIs públicas ou dados em tempo real; toda a
-  resposta depende da base local e das ferramentas implementadas.
-- O arquivo `.env` real não é entregue; a chave precisa ser configurada pelo
-  avaliador.
+- Base acadêmica fictícia, com apenas três documentos.
+- Ollama Cloud sem créditos; agente `gpt-oss:20b` não responde no momento.
+- RAGAS executado com `qwen2.5:7b` como gerador e juiz, não com GPT-OSS 20B.
+- `answer_relevancy` baixa e respostas prolixas.
+- Duas armadilhas ficaram sem contexto exposto na execução RAGAS.
+- Ground truths pendentes de validação humana.
+- Guardrails heurísticos não substituem revisão humana.
+- Evidências de interface usam contingência local, não o agente Cloud.
+- Certificação, turma/instituição e vídeo pendentes.
+
+## Entregáveis
+
+- `avaliacao_ragas.json` — resultado real preservado.
+- `certificacao.txt` — nomes e RMs preenchidos; turma, instituição e
+  certificação pendentes.
+- `Chat_Log.txt` — interações reais de validação local.
+- `demo_video_url.txt` — URL pendente, sem valor fictício.
+- `docs/AVALIACAO_RAGAS.md` — análise das métricas.
+- `docs/COMPARACAO_CHUNKING.md` — comparação e decisão.
+- `docs/CONCLUSAO.md` — conclusão curta com números reais.
+- `docs/REVISAO_GROUND_TRUTHS.md` — revisão das oito respostas.
+- `evidencias/` — capturas e logs reais.
+
+## Justificativa para a ausência do notebook
+
+O professor autorizou a execução local e a retirada do `.ipynb`, desde que o
+motivo fosse documentado. Todo o projeto está em módulos `.py`; não há Jupyter,
+Google Colab ou dependências de notebook.
 
 ## Próximas etapas
 
-1. ~~Criação dos três documentos autorais da base documental.~~ Concluído.
-2. ~~Ingestão, metadados e comparação de duas estratégias de chunking.~~
-   Concluído.
-3. ~~Indexação no ChromaDB com embeddings locais.~~ Concluído.
-4. ~~Pipeline RAG com LCEL, citações e recusa sem evidência.~~ Concluído;
-   falta validar a resposta real do Ollama Cloud.
-5. ~~Guardrails de escopo, prompt injection, LGPD e contexto
-   insuficiente.~~ Concluído.
-6. ~~Agente com ferramentas e limite de seis chamadas.~~ Concluído;
-   falta validar com o Ollama Cloud real.
-7. ~~Interface Gradio com histórico e fontes.~~ Concluído; falta validar
-   com o Ollama Cloud real.
-8. ~~Dataset de oito perguntas, runner RAGAS e comparação medida de
-   chunking.~~ Concluído; a avaliação RAGAS real continua pendente.
-9. Finalização dos entregáveis, vídeo e checklist da entrega.
-
-## Pendências conhecidas
-
-- Adicionar créditos à conta do Ollama Cloud para validar respostas reais.
-- Executar `python scripts/evaluate_ragas.py` com créditos e substituir o
-  status `pendente` de `avaliacao_ragas.json` por métricas reais.
-- Validar os oito `ground_truth` marcados como
-  `pendente_validacao_humana`.
-- Confirmar a compatibilidade do Python 3.14.3 ou usar Python 3.12.
-- Validar guardrails, agente e interface com respostas reais do Ollama
-  Cloud quando a conta tiver créditos.
-- Concluir `certificacao.txt`, `Chat_log.txt` e `demo_video_url.txt`; os
-  arquivos atuais são marcadores de pendência e não contêm dados inventados.
-- Preencher os nomes dos integrantes do trio.
+1. Adicionar créditos à Ollama Cloud e validar o agente `gpt-oss:20b`.
+2. Reexecutar o RAGAS separando GPT-OSS 20B (gerador) e Qwen 2.5 7B (juiz).
+3. Corrigir a montagem de contextos do RAGAS para não depender apenas das
+   fontes citadas.
+4. Validar os oito ground truths com uma pessoa.
+5. Reduzir respostas prolixas e melhorar `answer_relevancy`.
+6. Gravar o vídeo e preencher certificação, turma e instituição.

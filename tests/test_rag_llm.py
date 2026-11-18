@@ -50,20 +50,35 @@ class ChatModelConfigurationTests(unittest.TestCase):
         )
         self.assertEqual(llm.client_kwargs["timeout"], 15)
 
-    def test_missing_api_key_raises_configuration_error(self) -> None:
+    def test_missing_api_key_raises_for_remote_ollama(self) -> None:
         settings = Settings(
             _env_file=None,
             ollama_api_key=None,
+            ollama_base_url="https://ollama.example",
             ollama_model="test-model",
         )
 
         with self.assertRaises(LLMConfigurationError):
             create_chat_model(settings)
 
+    def test_local_ollama_does_not_require_api_key(self) -> None:
+        settings = Settings(
+            _env_file=None,
+            ollama_api_key=None,
+            ollama_base_url="http://127.0.0.1:11434",
+            ollama_model="test-model",
+        )
+
+        llm = create_chat_model(settings)
+
+        self.assertEqual(llm.model, "test-model")
+        self.assertNotIn("headers", llm.client_kwargs)
+
     def test_missing_model_raises_configuration_error(self) -> None:
         settings = Settings(
             _env_file=None,
             ollama_api_key="test-key",
+            ollama_base_url="https://ollama.example",
             ollama_model="",
         )
 

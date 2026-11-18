@@ -24,7 +24,7 @@ from ecocidadao.evaluation import (
 from ecocidadao.rag import (
     RagResponse,
     RagService,
-    create_chat_model,
+    create_judge_chat_model,
 )
 
 
@@ -107,6 +107,34 @@ def _ragas_records(
     return records
 
 
+class _RagasEmbeddingAdapter:
+    """Adapta o modelo local ao rastreamento do RAGAS.
+
+    O wrapper do RAGAS usa o atributo ``model`` como nome textual. O
+    LocalEmbeddingModel expõe ali o objeto SentenceTransformer, por isso
+    este adaptador mantém o nome do modelo e delega apenas os embeddings.
+    """
+
+    def __init__(self, embedding_model: Any, model_name: str) -> None:
+        self._embedding_model = embedding_model
+        self.model = model_name
+
+    def embed_query(self, text: str) -> list[float]:
+        return self._embedding_model.embed_query(text)
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return self._embedding_model.embed_documents(texts)
+
+    async def aembed_query(self, text: str) -> list[float]:
+        return await self._embedding_model.aembed_query(text)
+
+    async def aembed_documents(
+        self,
+        texts: list[str],
+    ) -> list[list[float]]:
+        return await self._embedding_model.aembed_documents(texts)
+
+
 def _run_ragas(
     records: list[dict[str, Any]],
     settings: Settings,
@@ -121,10 +149,16 @@ def _run_ragas(
         context_recall,
         faithfulness,
     )
+    from ragas.run_config import RunConfig
 
-    llm = create_chat_model(settings)
+    llm = create_judge_chat_model(settings)
     wrapped_llm = LangchainLLMWrapper(llm, bypass_temperature=True)
-    wrapped_embeddings = LangchainEmbeddingsWrapper(embedding_model)
+    wrapped_embeddings = LangchainEmbeddingsWrapper(
+        _RagasEmbeddingAdapter(
+            embedding_model,
+            settings.embedding_model,
+        )
+    )
     metrics = [
         faithfulness,
         answer_relevancy,
@@ -138,7 +172,14 @@ def _run_ragas(
         metrics=metrics,
         llm=wrapped_llm,
         embeddings=wrapped_embeddings,
-        show_progress=False,
+        run_config=RunConfig(
+            timeout=600,
+            max_retries=3,
+            max_wait=15,
+            max_workers=1,
+        ),
+        batch_size=1,
+        show_progress=True,
         raise_exceptions=False,
     )
     frame = result.to_pandas()
@@ -162,7 +203,15 @@ def _configuration(
         "top_k": top_k,
         "llm_model": settings.ollama_model or None,
         "llm_base_url": settings.ollama_base_url,
+        "ragas_judge_model": settings.ragas_judge_model or None,
+        "ragas_judge_base_url": settings.ragas_judge_base_url,
+        "ragas_judge_execution": (
+            "local_ollama"
+            if settings.uses_local_ragas_judge
+            else "remote_ollama"
+        ),
         "embedding_model": settings.embedding_model,
+        "embedding_execution": "local_sentence_transformers",
         "dataset_path": str(dataset_path),
         "ragas_version": _ragas_version(),
     }

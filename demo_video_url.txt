@@ -1,10 +1,17 @@
 URL do video: [PENDENTE]
 
-Pontos abordados:
+Status: o video de demonstracao ainda nao foi gravado ou publicado.
+Nao foi inserida nenhuma URL ficticia.
+
+Roteiro para a gravacao real:
 - Instalacao e configuracao do ambiente.
-- Execucao da ingestao e indexacao.
-- Interface Gradio com fontes.
+- Ingestao e indexacao no ChromaDB.
+- Interface Gradio com resposta e fontes documentais.
 - Pergunta temporal sobre o Parque das Acacias.
 - Pergunta sobre medicamentos vencidos.
-- Recusa de pergunta fora do escopo.
-- Testes automatizados.
+- Recusa de pergunta fora do escopo pelos guardrails.
+- Agente usando ferramentas (Ecopontos e calculadora).
+- Execucao da suite de testes automatizados.
+
+Quando o video existir, substituir [PENDENTE] pela URL real e registrar a
+data da gravacao.

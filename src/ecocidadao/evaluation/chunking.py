@@ -36,6 +36,15 @@ WINNER_REASON = (
     "as metricas RAGAS de contexto e a validacao humana dos ground truths "
     "ainda estao pendentes."
 )
+RECOMMENDED_STRATEGY = "markdown"
+RECOMMENDATION_REASON = (
+    "Recomendacao tecnica baseada nos dados de retrieval: as duas estrategias "
+    "empatam em Hit@3, Hit@5 e MRR; a Markdown tem precision documental maior "
+    "(0.80 contra 0.725), chunks menores e preserva a hierarquia de secoes. "
+    "O recall documental e menor (0.875 contra 1.0) em duas armadilhas, o que "
+    "deve ser monitorado com a janela temporal ampliada. Nao e um vencedor "
+    "estatistico definitivo sem RAGAS por estrategia."
+)
 _STRATEGY_CONFIG = {
     "fixo": {
         "chunk_size": FIXED_CHUNK_SIZE,
@@ -330,6 +339,8 @@ def build_chunking_experiment(
         },
         "winner": None,
         "winner_reason": WINNER_REASON,
+        "recommended_strategy": RECOMMENDED_STRATEGY,
+        "recommendation_reason": RECOMMENDATION_REASON,
         "ragas_status": RAGAS_CONTEXT_STATUS,
         "ragas_reason": RAGAS_CONTEXT_REASON,
         "strategies": strategy_results,
@@ -418,6 +429,8 @@ def validate_chunking_experiment(payload: Any) -> None:
 __all__ = [
     "EXPERIMENT_SCHEMA_VERSION",
     "EXPERIMENT_STATUS",
+    "RECOMMENDED_STRATEGY",
+    "RECOMMENDATION_REASON",
     "ChunkingExperimentError",
     "build_chunking_experiment",
     "compute_ranking_metrics",
