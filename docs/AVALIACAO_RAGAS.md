@@ -95,8 +95,8 @@ Configuração registrada nessa execução:
 - O mesmo modelo local foi gerador e juiz, o que pode introduzir viés de
   autoavaliação. A configuração pretendida separa GPT-OSS 20B (gerador) e
   Qwen 2.5 7B (juiz).
-- Os ground truths ainda são rascunhos técnicos e não passaram por validação
-  humana.
+- Os ground truths foram validados por Victor Binot (RM 571499) em 18/11/2026;
+  o registro está em `docs/REVISAO_GROUND_TRUTHS.md`.
 
 ## Melhorias concretas, em ordem de prioridade
 
@@ -114,8 +114,8 @@ Configuração registrada nessa execução:
 5. **Reexecutar com a configuração-alvo:** GPT-OSS 20B para gerar respostas e
    Qwen 2.5 7B como juiz, quando a conta Cloud tiver créditos. Registrar no
    JSON que os modelos são distintos.
-6. **Validar os oito ground truths** com uma pessoa antes de usar as métricas
-   como nota final.
+6. **Manter o registro da validação humana** atualizado em
+   `docs/REVISAO_GROUND_TRUTHS.md` sempre que o dataset mudar.
 7. **Ampliar o conjunto de avaliação** para reduzir a variância de médias
    calculadas sobre apenas oito perguntas.
 
@@ -127,4 +127,4 @@ prioridade não é trocar o retriever, e sim controlar a geração e corrigir a
 forma como os contextos são registrados para o RAGAS. As métricas de 0,5708
 (faithfulness), 0,1808 (answer relevancy), 0,5208 (context precision) e
 0,9375 (context recall) são reais, mas devem ser lidas com as ressalvas de
-modelo gerador local e ground truths pendentes de validação humana.
+modelo gerador local e ground truths validados por Victor Binot em 18/11/2026.

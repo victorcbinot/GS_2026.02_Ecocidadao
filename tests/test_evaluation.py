@@ -45,13 +45,27 @@ class EvaluationDatasetTests(unittest.TestCase):
         ids = [question.id for question in self.dataset.questions]
         self.assertEqual(len(ids), len(set(ids)))
 
-    def test_ground_truths_are_pending_human_validation(self) -> None:
+    def test_ground_truths_are_human_validated(self) -> None:
+        self.assertEqual(
+            self.dataset.ground_truth_status,
+            "validado_humanamente",
+        )
         for question in self.dataset.questions:
             self.assertEqual(
                 question.ground_truth_status,
-                "pendente_validacao_humana",
+                "validado_humanamente",
             )
             self.assertTrue(question.ground_truth.strip())
+
+    def test_dataset_rejects_pending_ground_truths(self) -> None:
+        payload = self.dataset.to_dict()
+        payload["ground_truth_status"] = "pendente_validacao_humana"
+        payload["questions"][0]["ground_truth_status"] = (
+            "pendente_validacao_humana"
+        )
+
+        with self.assertRaises(EvaluationDatasetError):
+            parse_evaluation_dataset(payload)
 
     def test_trap_questions_declare_a_conflict_type(self) -> None:
         for question in self.dataset.questions:

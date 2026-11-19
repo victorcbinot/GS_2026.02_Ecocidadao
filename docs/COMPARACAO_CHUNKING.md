@@ -11,7 +11,7 @@
 - Embeddings: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
   local, CPU
 - Índices: ChromaDB temporário, recriado para cada estratégia
-- Ground truths: `pendente_validacao_humana`
+- Ground truths: `validado_humanamente`
 
 Configurações comparadas:
 

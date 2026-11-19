@@ -42,11 +42,11 @@ arquivos PNG são capturas diretas da página renderizada.
 - `03_guardrail_escopo.txt` — recusa de pergunta fora do escopo.
 - `03b_guardrail_injection.txt` — bloqueio de prompt injection.
 - `03c_guardrail_lgpd.txt` — bloqueio de pedido de dados pessoais.
-- `05_testes.txt` — saída da suíte completa de testes (154 testes).
+- `05_testes.txt` — saída da suíte completa de testes (155 testes).
 - `06_comparacao_chunking.txt` — comparação real fixo versus Markdown.
-- `07_configuracao_modelos.txt` — confirmação de modelos separados, endpoint
-  do juiz local, embeddings locais e limite de 6 ferramentas. A chave não é
-  exibida; apenas o indicador `agent_key_present`.
+- `07_configuracao_modelos.txt` — confirmação dos modelos do agente e do juiz,
+  endpoints locais, embeddings locais e limite de 6 ferramentas. A chave não é
+  exibida.
 
 ## O que não foi possível capturar
 

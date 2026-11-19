@@ -11,7 +11,7 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
 
 - Pipeline RAG, agente com ferramentas, guardrails e interface Gradio
   implementados.
-- **154 testes automatizados passando**.
+- **155 testes automatizados passando**.
 - Avaliação RAGAS real registrada em `avaliacao_ragas.json`.
 - Comparação de chunking medida em
   `data/experiments/chunking_comparison.json`.
@@ -22,9 +22,10 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
   execução reproduzível e as evidências usam o modelo local. Isso está
   identificado em `evidencias/` e `Chat_Log.txt`; nenhum resultado foi
   inventado.
-- Os oito ground truths continuam marcados como `pendente_validacao_humana`.
-- Nomes, RMs e turma dos três integrantes preenchidos; certificação e vídeo
-  continuam pendentes.
+- Os oito ground truths foram validados por Victor Binot (RM 571499) em
+  18/11/2026 e estão marcados como `validado_humanamente`.
+- Nomes, RMs e turma dos três integrantes preenchidos; certificação,
+  autorização do notebook e vídeo continuam pendentes.
 
 ## Integrantes
 
@@ -112,6 +113,7 @@ GS_2026.02_Ecocidadao/
 │   ├── AVALIACAO_RAGAS.md
 │   ├── COMPARACAO_CHUNKING.md
 │   ├── CONCLUSAO.md
+│   ├── FORMULARIO_VALIDACAO_GROUND_TRUTHS.md
 │   └── REVISAO_GROUND_TRUTHS.md
 ├── src/ecocidadao/
 │   ├── config.py
@@ -266,9 +268,9 @@ baseada nos dados de retrieval. Detalhes em `docs/COMPARACAO_CHUNKING.md`.
 ## Avaliação RAGAS
 
 O dataset em `src/ecocidadao/evaluation/dataset.json` tem exatamente oito
-perguntas: quatro simples e quatro de armadilha. A revisão técnica está em
-`docs/REVISAO_GROUND_TRUTHS.md`; todos os ground truths continuam
-`pendente_validacao_humana`.
+perguntas: quatro simples e quatro de armadilha. A validação humana está em
+`docs/REVISAO_GROUND_TRUTHS.md`; os oito ground truths estão
+`validado_humanamente` desde 18/11/2026.
 
 Resultados reais preservados em `avaliacao_ragas.json`:
 
@@ -355,9 +357,9 @@ A pasta `evidencias/` contém registros reais:
   `02b_agente_ferramentas_combinadas.txt`,
   `03_guardrail_escopo.txt`, `03b_guardrail_injection.txt`,
   `03c_guardrail_lgpd.txt` e `06_comparacao_chunking.txt` — logs reais.
-- `05_testes.txt` — saída da suíte completa (154 testes).
-- `07_configuracao_modelos.txt` — separação dos modelos, embeddings locais e
-  limite de 6 ferramentas.
+- `05_testes.txt` — saída da suíte completa (155 testes).
+- `07_configuracao_modelos.txt` — configuração dos modelos, embeddings locais
+  e limite de 6 ferramentas.
 
 As capturas de interface foram feitas com o modelo local `qwen2.5:7b` porque
 a Ollama Cloud retornou HTTP 402. Não há prints fictícios. Detalhes e comandos
@@ -381,10 +383,9 @@ de energia e hardware não foi medido.
 - RAGAS executado com `qwen2.5:7b` como gerador e juiz, não com GPT-OSS 20B.
 - `answer_relevancy` baixa e respostas prolixas.
 - Duas armadilhas ficaram sem contexto exposto na execução RAGAS.
-- Ground truths pendentes de validação humana.
 - Guardrails heurísticos não substituem revisão humana.
 - Evidências de interface usam contingência local, não o agente Cloud.
-- Certificação e vídeo pendentes.
+- Certificação, autorização do notebook e vídeo pendentes.
 
 ## Entregáveis
 
@@ -396,7 +397,8 @@ de energia e hardware não foi medido.
 - `docs/AVALIACAO_RAGAS.md` — análise das métricas.
 - `docs/COMPARACAO_CHUNKING.md` — comparação e decisão.
 - `docs/CONCLUSAO.md` — conclusão curta com números reais.
-- `docs/REVISAO_GROUND_TRUTHS.md` — revisão das oito respostas.
+- `docs/FORMULARIO_VALIDACAO_GROUND_TRUTHS.md` — formulário preenchido.
+- `docs/REVISAO_GROUND_TRUTHS.md` — validação humana das oito respostas.
 - `evidencias/` — capturas e logs reais.
 
 ## Justificativa para a ausência do notebook

@@ -7,7 +7,7 @@
     "question_count": 8,
     "simple_question_count": 4,
     "trap_question_count": 4,
-    "ground_truth_status": "pendente_validacao_humana"
+    "ground_truth_status": "validado_humanamente"
   },
   "configuration": {
     "top_k": 5,

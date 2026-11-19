@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "description": "Dataset de avaliação do EcoCidadão com oito perguntas: quatro simples e quatro que exigem resolver conflitos temporais ou de vigência entre os documentos.",
-  "ground_truth_status": "pendente_validacao_humana",
+  "ground_truth_status": "validado_humanamente",
   "questions": [
     {
       "id": "simple_medicamentos",
@@ -10,7 +10,7 @@
       "as_of": "2026-06-10",
       "trap_type": null,
       "ground_truth": "Medicamentos vencidos não devem ser entregues em Ecopontos. Eles devem ser levados à Farmácia Municipal EcoSaúde, na Rua das Palmeiras, 77, Centro, que atende de segunda a sexta-feira, das 08:00 às 17:00.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "regulamento_descarte"
       ],
@@ -31,7 +31,7 @@
       "as_of": "2026-06-10",
       "trap_type": null,
       "ground_truth": "O Ecoponto Vila Verde aceita papel, papelão, vidro, plástico, metal e óleo de cozinha usado. Funciona de terça a sábado, das 08:00 às 16:00.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "lista_ecopontos"
       ],
@@ -53,7 +53,7 @@
       "as_of": "2026-06-10",
       "trap_type": null,
       "ground_truth": "O óleo de cozinha usado deve ser entregue exclusivamente no Ecoponto Vila Verde, em garrafa PET lacrada, com no máximo 2 litros por entrega.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "lista_ecopontos",
         "regulamento_descarte"
@@ -75,7 +75,7 @@
       "as_of": "2026-06-10",
       "trap_type": null,
       "ground_truth": "Entulho e resíduos de construção devem ser entregues somente no Ecoponto Industrial. O limite é de 2 metros cúbicos por mês por domicílio.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "lista_ecopontos",
         "regulamento_descarte"
@@ -97,7 +97,7 @@
       "as_of": "2026-04-20",
       "trap_type": "periodo_de_interdicao",
       "ground_truth": "Não. O Parque das Acácias está interditado de 15 de março de 2026 a 31 de maio de 2026, inclusive, e não recebe nenhum material nesse período. Em 20 de abril de 2026, pilhas e baterias devem ser levadas ao Ecoponto Industrial.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "comunicado_interdicao",
         "lista_ecopontos"
@@ -119,7 +119,7 @@
       "as_of": "2026-06-10",
       "trap_type": "mudanca_permanente_apos_reabertura",
       "ground_truth": "Não. A partir de 1º de junho de 2026, o Parque das Acácias deixa de aceitar pilhas e baterias. Elas passam a ser recebidas exclusivamente no Ecoponto Industrial.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "comunicado_interdicao",
         "lista_ecopontos"
@@ -141,7 +141,7 @@
       "as_of": "2026-04-20",
       "trap_type": "periodo_de_interdicao",
       "ground_truth": "Não. Durante a interdição de 15 de março de 2026 a 31 de maio de 2026, o Parque das Acácias não recebe nenhum material. Em 20 de abril de 2026, eletrônicos devem ser levados ao Ecoponto Industrial.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "comunicado_interdicao",
         "lista_ecopontos"
@@ -163,7 +163,7 @@
       "as_of": "2026-06-10",
       "trap_type": "horario_substituido_por_comunicado",
       "ground_truth": "Em 10 de junho de 2026, o Parque das Acácias funciona de segunda a sexta-feira, das 08:00 às 17:00, e no sábado, das 08:00 às 12:00. Esse horário foi definido a partir de 1º de junho de 2026 e substitui o horário anterior de segunda a sábado, das 07:00 às 19:00.",
-      "ground_truth_status": "pendente_validacao_humana",
+      "ground_truth_status": "validado_humanamente",
       "reference_doc_ids": [
         "comunicado_interdicao",
         "lista_ecopontos"

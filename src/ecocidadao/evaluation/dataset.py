@@ -12,7 +12,7 @@ DATASET_SCHEMA_VERSION = 1
 EXPECTED_QUESTION_COUNT = 8
 SIMPLE_QUESTION_COUNT = 4
 TRAP_QUESTION_COUNT = 4
-GROUND_TRUTH_STATUS = "pendente_validacao_humana"
+GROUND_TRUTH_STATUS = "validado_humanamente"
 Category = Literal["simples", "armadilha"]
 
 
