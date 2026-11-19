@@ -42,7 +42,7 @@ Declaramos que este material corresponde ao projeto EcoCidadão, desenvolvido
 em grupo para a Global Solution 2026.2, seguindo as orientações da atividade
 acadêmica.
 
-6. AUTORIZAÇÃO PARA AUSENCIA DO NOTEBOOK
-Status: [PENDENTE — print da mensagem do Professor no Teams em
-evidencias/autorizacao_notebook_teams.png]
-Observação: sem essa autorização, há desconto de 2,0 pontos no critério 1.
+6. EXECUÇÃO LOCAL EM VEZ DE NOTEBOOK
+O projeto foi executado localmente, em Python no Windows, sem Google Colab,
+Jupyter Notebook ou arquivo .ipynb. A justificativa completa está no README,
+na seção "Execução local em vez de notebook".

@@ -24,8 +24,8 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
   inventado.
 - Os oito ground truths foram validados por Victor Binot (RM 571499) em
   18/11/2026 e estão marcados como `validado_humanamente`.
-- Nomes, RMs e turma dos três integrantes preenchidos; certificação,
-  autorização do notebook e vídeo continuam pendentes.
+- Nomes, RMs e turma dos três integrantes preenchidos; certificação e vídeo
+  continuam pendentes. A execução local, sem notebook, está justificada abaixo.
 
 ## Integrantes
 
@@ -385,7 +385,7 @@ de energia e hardware não foi medido.
 - Duas armadilhas ficaram sem contexto exposto na execução RAGAS.
 - Guardrails heurísticos não substituem revisão humana.
 - Evidências de interface usam contingência local, não o agente Cloud.
-- Certificação, autorização do notebook e vídeo pendentes.
+- Certificação e vídeo pendentes.
 
 ## Entregáveis
 
@@ -401,14 +401,16 @@ de energia e hardware não foi medido.
 - `docs/REVISAO_GROUND_TRUTHS.md` — validação humana das oito respostas.
 - `evidencias/` — capturas e logs reais.
 
-## Justificativa para a ausência do notebook
+## Execução local em vez de notebook
 
-O professor autorizou a execução local e a retirada do `.ipynb`, desde que o
-motivo fosse documentado. Todo o projeto está em módulos `.py`; não há Jupyter,
-Google Colab ou dependências de notebook.
+O projeto foi executado localmente, em Python 3.14.3 no Windows, usando
+PowerShell e os módulos `.py` do repositório. Não foi usado Google Colab,
+Jupyter Notebook ou arquivo `.ipynb`.
 
-Registro: print da autorização do Professor no Teams em
-`evidencias/autorizacao_notebook_teams.png`.
+A opção pela execução local foi para manter o pipeline, a interface Gradio, os
+testes e a avaliação RAGAS no mesmo ambiente versionado do projeto. Os comandos
+de instalação, ingestão, indexação, consulta e testes estão documentados nas
+seções anteriores deste README.
 
 ## Próximas etapas
 
@@ -416,7 +418,7 @@ Registro: print da autorização do Professor no Teams em
 2. Reexecutar o RAGAS separando GPT-OSS 20B (gerador) e Qwen 2.5 7B (juiz).
 3. Corrigir a montagem de contextos do RAGAS para não depender apenas das
    fontes citadas.
-4. Validar os oito ground truths com uma pessoa.
+4. Aplicar ao `dataset.json` os ground truths reescritos pelo grupo.
 5. Reduzir respostas prolixas e melhorar `answer_relevancy`.
 6. Gravar o vídeo, preencher o link em `demo_video_url.txt` e finalizar a
    certificação.
