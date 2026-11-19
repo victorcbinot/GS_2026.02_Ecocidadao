@@ -55,14 +55,21 @@ def create_chat_model(
             "Authorization": f"Bearer {resolved_api_key}"
         }
 
-    return ChatOllama(
-        model=resolved_model,
-        base_url=resolved_base_url,
-        temperature=settings.llm_temperature,
-        num_predict=settings.llm_max_tokens,
-        validate_model_on_init=False,
-        client_kwargs=client_kwargs,
-    )
+    chat_kwargs: dict[str, object] = {
+        "model": resolved_model,
+        "base_url": resolved_base_url,
+        "temperature": settings.llm_temperature,
+        "num_predict": settings.llm_max_tokens,
+        "validate_model_on_init": False,
+        "client_kwargs": client_kwargs,
+    }
+    if (
+        settings.llm_num_gpu is not None
+        and is_local_ollama_url(resolved_base_url)
+    ):
+        chat_kwargs["num_gpu"] = settings.llm_num_gpu
+
+    return ChatOllama(**chat_kwargs)
 
 
 def create_judge_chat_model(settings: Settings | None = None) -> ChatOllama:

@@ -1,16 +1,23 @@
 CONFIGURAÇÃO DOS MODELOS — ECOCIDADÃO
 
 Agente principal
-Modelo: gpt-oss:20b
-Endpoint: https://ollama.com
-Chave configurada: Sim
-Execução local: Não
+Modelo: qwen2.5:7b
+Endpoint: http://127.0.0.1:11434
+Chave configurada: Não
+Execução local: Sim
+Camadas na GPU: 28
+Timeout: 180 segundos
 
 Juiz RAGAS
 Modelo: qwen2.5:7b
 Endpoint: http://127.0.0.1:11434
 Chave configurada: Não
 Execução local: Sim
+
+Alternativa Ollama Cloud
+Modelo alvo: gpt-oss:20b
+Endpoint: https://ollama.com
+Situação: indisponível por HTTP 402 (falta de créditos)
 
 Embeddings
 Modelo: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2

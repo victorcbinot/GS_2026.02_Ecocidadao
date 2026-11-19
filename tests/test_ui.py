@@ -98,7 +98,7 @@ class PresentationTests(unittest.TestCase):
             stopped_reason="llm_error",
         )
         answer = display_answer(response)
-        self.assertIn("Ollama local", answer)
+        self.assertIn("conectar ao Ollama", answer)
         self.assertIn("Falha de conexão", format_assistant_message(response))
 
     def test_generic_agent_error_from_rag_llm_is_mapped(self) -> None:
@@ -118,7 +118,7 @@ class PresentationTests(unittest.TestCase):
             ),
             stopped_reason="completed",
         )
-        self.assertIn("Ollama local", display_answer(response))
+        self.assertIn("conectar ao Ollama", display_answer(response))
 
     def test_vector_store_failure_has_friendly_answer(self) -> None:
         response = AgentResponse(

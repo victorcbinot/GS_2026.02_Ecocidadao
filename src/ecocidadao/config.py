@@ -38,7 +38,8 @@ class Settings(BaseSettings):
     ollama_model: str = ""
     llm_temperature: float = 0.1
     llm_max_tokens: int = 1024
-    llm_timeout_s: int = 60
+    llm_timeout_s: int = 180
+    llm_num_gpu: int | None = Field(default=None, ge=0)
 
     ragas_judge_api_key: SecretStr | None = None
     ragas_judge_base_url: str = "http://127.0.0.1:11434"

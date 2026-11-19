@@ -1,7 +1,7 @@
 # Conclusão
 
 O EcoCidadão entrega pipeline RAG, agente com quatro ferramentas, guardrails,
-interface Gradio e 152 testes passando. Na avaliação real preservada em
+interface Gradio e 154 testes passando. Na avaliação real preservada em
 `avaliacao_ragas.json`: faithfulness 0,570833, answer relevancy 0,180817,
 context precision 0,520833 e context recall 0,937500. A recuperação é o ponto
 forte; a geração é prolixa e pouco aderente. No chunking, o fixo teve 17 chunks

@@ -11,25 +11,28 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
 
 - Pipeline RAG, agente com ferramentas, guardrails e interface Gradio
   implementados.
-- **152 testes automatizados passando**.
+- **154 testes automatizados passando**.
 - Avaliação RAGAS real registrada em `avaliacao_ragas.json`.
 - Comparação de chunking medida em
   `data/experiments/chunking_comparison.json`.
-- O agente principal está configurado para `gpt-oss:20b` na Ollama Cloud e o
-  juiz RAGAS para `qwen2.5:7b` local, com embeddings locais.
+- A configuração local usa `qwen2.5:7b` para o agente e para o juiz RAGAS, com
+  embeddings locais.
 - A conta da Ollama Cloud continua retornando **HTTP 402** por falta de
-  créditos. Por isso, a validação visual e as interações do chat log usaram o
-  `qwen2.5:7b` local como contingência. Isso está identificado em
-  `evidencias/` e `Chat_Log.txt`; nenhum resultado foi inventado.
+  créditos. O alvo `gpt-oss:20b` permanece documentado como alternativa, mas a
+  execução reproduzível e as evidências usam o modelo local. Isso está
+  identificado em `evidencias/` e `Chat_Log.txt`; nenhum resultado foi
+  inventado.
 - Os oito ground truths continuam marcados como `pendente_validacao_humana`.
-- Nomes, RMs e turma dos três integrantes preenchidos; certificação, instituição
-  e vídeo continuam pendentes.
+- Nomes, RMs e turma dos três integrantes preenchidos; certificação e vídeo
+  continuam pendentes.
 
 ## Integrantes
 
 - Felipe de Oliveira Doern — RM 568798
 - Miguel Marcelo Alves Ramos de Oliveira — RM 569467
 - Victor Correia Binot — RM 571499
+
+Turma: 1CCPI — FIAP.
 
 ## Objetivo
 
@@ -76,14 +79,16 @@ improdutivos.
 
 | Papel | Configuração atual | Execução |
 |---|---|---|
-| Agente principal | `gpt-oss:20b` | Ollama Cloud (`https://ollama.com`) |
+| Agente principal | `qwen2.5:7b` | Ollama local (`http://127.0.0.1:11434`) |
 | Juiz RAGAS | `qwen2.5:7b` | Ollama local (`http://127.0.0.1:11434`) |
 | Embeddings | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | Local, CPU |
 | ChromaDB | `1.5.9` | Local |
 
 O agente e o juiz têm variáveis independentes (`OLLAMA_*` e `RAGAS_JUDGE_*`).
-O juiz local não exige chave. A chave do agente é lida como `SecretStr` e não é
-exibida em logs nem na interface.
+O juiz local não exige chave. A chave do agente, quando usada no modo Cloud, é
+lida como `SecretStr` e não é exibida em logs nem na interface. `LLM_NUM_GPU`
+limita as camadas enviadas à GPU; em máquinas com falha de CUDA, `28` funciona
+como contingência e `0` força CPU.
 
 > A execução RAGAS preservada em `avaliacao_ragas.json` usou o
 > `qwen2.5:7b` local como **gerador das respostas e como juiz**, porque a
@@ -96,7 +101,7 @@ exibida em logs nem na interface.
 GS_2026.02_Ecocidadao/
 ├── base_documental/          # três documentos da base
 ├── avaliacao_ragas.json      # resultado RAGAS real preservado
-├── certificacao.txt          # nomes/RMs preenchidos; certificação pendente
+├── certificacao.txt          # nomes/RMs/turma preenchidos; certificação pendente
 ├── Chat_Log.txt              # interações reais de validação local
 ├── demo_video_url.txt        # URL do vídeo pendente
 ├── app.py                      # ponto de entrada da interface
@@ -130,7 +135,7 @@ GS_2026.02_Ecocidadao/
 - Windows com PowerShell.
 - Python 3.14.3 no ambiente validado; o código mantém compatibilidade
   pretendida com Python 3.12+.
-- Ollama local para o juiz RAGAS e para a contingência de validação.
+- Ollama local com `qwen2.5:7b` para o agente e para o juiz RAGAS.
 - Opcional: chave e créditos da Ollama Cloud para o agente `gpt-oss:20b`.
 
 ## Instalação
@@ -153,6 +158,8 @@ Preencha o `.env` conforme o modo de execução. O `.env` é ignorado pelo Git.
 OLLAMA_BASE_URL=http://127.0.0.1:11434
 OLLAMA_MODEL=qwen2.5:7b
 OLLAMA_API_KEY=
+LLM_TIMEOUT_S=180
+LLM_NUM_GPU=28
 
 RAGAS_JUDGE_BASE_URL=http://127.0.0.1:11434
 RAGAS_JUDGE_MODEL=qwen2.5:7b
@@ -348,7 +355,7 @@ A pasta `evidencias/` contém registros reais:
   `02b_agente_ferramentas_combinadas.txt`,
   `03_guardrail_escopo.txt`, `03b_guardrail_injection.txt`,
   `03c_guardrail_lgpd.txt` e `06_comparacao_chunking.txt` — logs reais.
-- `05_testes.txt` — saída da suíte completa (152 testes).
+- `05_testes.txt` — saída da suíte completa (154 testes).
 - `07_configuracao_modelos.txt` — separação dos modelos, embeddings locais e
   limite de 6 ferramentas.
 
@@ -377,13 +384,13 @@ de energia e hardware não foi medido.
 - Ground truths pendentes de validação humana.
 - Guardrails heurísticos não substituem revisão humana.
 - Evidências de interface usam contingência local, não o agente Cloud.
-- Certificação, instituição e vídeo pendentes.
+- Certificação e vídeo pendentes.
 
 ## Entregáveis
 
 - `avaliacao_ragas.json` — resultado real preservado.
-- `certificacao.txt` — nomes, RMs e turma preenchidos; instituição e
-  certificação pendentes.
+- `certificacao.txt` — nomes, RMs e turma (1CCPI) preenchidos; certificação e
+  vídeo pendentes.
 - `Chat_Log.txt` — interações reais de validação local.
 - `demo_video_url.txt` — URL pendente, sem valor fictício.
 - `docs/AVALIACAO_RAGAS.md` — análise das métricas.
@@ -409,4 +416,5 @@ Registro: print da autorização do Professor no Teams em
    fontes citadas.
 4. Validar os oito ground truths com uma pessoa.
 5. Reduzir respostas prolixas e melhorar `answer_relevancy`.
-6. Gravar o vídeo e preencher certificação, turma e instituição.
+6. Gravar o vídeo, preencher o link em `demo_video_url.txt` e finalizar a
+   certificação.

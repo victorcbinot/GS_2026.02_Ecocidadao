@@ -4,10 +4,10 @@ Comando executado:
 python -m unittest discover -s tests -q
 
 Resultado: OK
-Testes executados: 152
+Testes executados: 154
 Falhas: 0
 Erros: 0
-Tempo aproximado: 7,0 segundos
+Tempo aproximado: 9,5 segundos
 Ambiente: Python 3.14.3, Windows
 
 Observação: o Gradio emite avisos de event loop não fechado durante os testes

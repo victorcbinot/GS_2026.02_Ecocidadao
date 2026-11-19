@@ -4,9 +4,9 @@
 
 As capturas de interface foram feitas em 17/11/2026 com o modelo local
 `qwen2.5:7b`, porque a Ollama Cloud retornou HTTP 402 por falta de créditos
-para o `gpt-oss:20b`. A configuração padrão do projeto não foi alterada: o
-`.env` continua com o agente principal em `gpt-oss:20b` na Ollama Cloud e o
-juiz RAGAS em `qwen2.5:7b` local.
+para o `gpt-oss:20b`. O `.env` passou a usar o agente principal e o juiz RAGAS
+em `qwen2.5:7b` local. Em máquinas com falha de CUDA, `LLM_NUM_GPU=28` limita
+as camadas na GPU; `0` força CPU.
 
 As evidências abaixo são reais. Nenhum print, resposta, fonte ou ferramenta
 foi inventado. A contingência local está declarada em cada caso.
@@ -42,7 +42,7 @@ arquivos PNG são capturas diretas da página renderizada.
 - `03_guardrail_escopo.txt` — recusa de pergunta fora do escopo.
 - `03b_guardrail_injection.txt` — bloqueio de prompt injection.
 - `03c_guardrail_lgpd.txt` — bloqueio de pedido de dados pessoais.
-- `05_testes.txt` — saída da suíte completa de testes (152 testes).
+- `05_testes.txt` — saída da suíte completa de testes (154 testes).
 - `06_comparacao_chunking.txt` — comparação real fixo versus Markdown.
 - `07_configuracao_modelos.txt` — confirmação de modelos separados, endpoint
   do juiz local, embeddings locais e limite de 6 ferramentas. A chave não é

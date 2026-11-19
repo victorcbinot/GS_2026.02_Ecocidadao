@@ -74,6 +74,32 @@ class ChatModelConfigurationTests(unittest.TestCase):
         self.assertEqual(llm.model, "test-model")
         self.assertNotIn("headers", llm.client_kwargs)
 
+    def test_local_ollama_can_limit_gpu_layers(self) -> None:
+        settings = Settings(
+            _env_file=None,
+            ollama_api_key=None,
+            ollama_base_url="http://127.0.0.1:11434",
+            ollama_model="test-model",
+            llm_num_gpu=28,
+        )
+
+        llm = create_chat_model(settings)
+
+        self.assertEqual(llm.num_gpu, 28)
+
+    def test_remote_ollama_ignores_gpu_layer_limit(self) -> None:
+        settings = Settings(
+            _env_file=None,
+            ollama_api_key="test-key",
+            ollama_base_url="https://ollama.example",
+            ollama_model="test-model",
+            llm_num_gpu=28,
+        )
+
+        llm = create_chat_model(settings)
+
+        self.assertIsNone(llm.num_gpu)
+
     def test_missing_model_raises_configuration_error(self) -> None:
         settings = Settings(
             _env_file=None,
