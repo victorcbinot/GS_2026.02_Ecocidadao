@@ -2,7 +2,7 @@
 
 ## Ressalva de ambiente
 
-As capturas de interface foram feitas em 17/11/2026 com o modelo local
+As capturas de interface foram feitas em 19/11/2026 com o modelo local
 `qwen2.5:7b`, porque a Ollama Cloud retornou HTTP 402 por falta de créditos
 para o `gpt-oss:20b`. O `.env` passou a usar o agente principal e o juiz RAGAS
 em `qwen2.5:7b` local. Em máquinas com falha de CUDA, `LLM_NUM_GPU=28` limita
@@ -13,12 +13,14 @@ foi inventado. A contingência local está declarada em cada caso.
 
 ## Interface Gradio
 
-- `04b_interface_gradio_consulta.png` — pergunta sobre pilhas em 20/04/2026,
-  respondida pelo agente com a ferramenta `consultar_ecopontos`.
+- `04b_interface_gradio_consulta.png` — pergunta sobre pilhas no Parque das
+  Acácias em 20/04/2026, respondida pelo agente com a ferramenta
+  `consultar_ecopontos` e sem fonte documental.
 - `04c_interface_gradio_rag_fontes.png` — pergunta sobre medicamentos vencidos,
-  respondida com `consultar_base_documental` e painel de fontes `[F1]` e `[F2]`.
-- `04d_interface_gradio_guardrail.png` — pergunta fora do escopo recusada antes
-  de consultar o modelo ou a base, com evento `input_scope_blocked`.
+  respondida com `consultar_base_documental` e painel de fonte documental `[F1]`.
+- `04d_interface_gradio_guardrail.png` — pergunta fora do escopo ("Como faço um
+  bolo de chocolate?") recusada antes de consultar o modelo ou a base, com
+  evento `input_scope_blocked`.
 
 Comando usado para subir a interface com contingência local:
 
@@ -30,8 +32,9 @@ $env:GRADIO_SERVER_PORT='7861'
 python app.py
 ```
 
-As capturas foram feitas com Chrome headless, em resolução 1440x1200. Os
-arquivos PNG são capturas diretas da página renderizada.
+As capturas foram feitas em 19/11/2026, em resolução de 1511x896 a 1556x915
+conforme a janela do navegador. Os arquivos PNG são capturas diretas da página
+renderizada.
 
 ## Logs de CLI
 
@@ -61,5 +64,6 @@ arquivos PNG são capturas diretas da página renderizada.
   reais do terminal.
 - As capturas Gradio foram obtidas de uma instância real em
   `http://127.0.0.1:7861`, com o app iniciado por `python app.py`.
-- As respostas e fontes coincidem com os registros textuais em
-  `Chat_Log.txt`.
+- As respostas e fontes seguem o mesmo pipeline, a mesma base documental e os
+  mesmos guardrails descritos em `Chat_Log.txt`. As capturas atuais substituem
+  as versões anteriores.
