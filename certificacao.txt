@@ -22,7 +22,7 @@ RM: 571499
 3. LINKS DA ENTREGA
 
 Repositório GitHub: https://github.com/victorcbinot/GS_2026.02_Ecocidadao
-Vídeo de demonstração: [PENDENTE — link será informado depois da gravação]
+Vídeo de demonstração: https://youtu.be/NGprbQhJ2WY
 
 4. TELA FINAL DO PROJETO
 

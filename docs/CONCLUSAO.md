@@ -10,5 +10,6 @@ por preservar seções. As limitações são o HTTP 402 da Ollama Cloud, o RAGAS
 Qwen local como gerador e juiz e duas armadilhas sem contexto. Os ground truths
 foram reescritos e validados por Victor Binot (RM 571499) em 18/11/2026. As melhorias são
 separar gerador e juiz, corrigir os contextos do RAGAS, encurtar respostas e
-ajustar recuperação/reranking. Certificação e vídeo ainda dependem de dados
-humanos; a execução local, sem notebook, está justificada no README.
+ajustar recuperação/reranking. A certificação foi preenchida com os dados do
+grupo e o vídeo de demonstração está publicado; a execução local, sem notebook,
+está justificada no README.

@@ -56,7 +56,8 @@ renderizada.
 - Resposta real do agente `gpt-oss:20b` na Ollama Cloud: a conta retorna
   HTTP 402.
 - Avaliação RAGAS com GPT-OSS 20B gerando respostas: mesma limitação.
-- Vídeo de demonstração: ainda não gravado; ver `demo_video_url.txt`.
+- Vídeo de demonstração: publicado em 19/11/2026 em
+  https://youtu.be/NGprbQhJ2WY; ver `demo_video_url.txt`.
 
 ## Como validar que não são prints fictícios
 

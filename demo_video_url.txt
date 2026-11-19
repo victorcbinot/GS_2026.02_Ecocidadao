@@ -1,9 +1,8 @@
-URL do video: [PENDENTE]
+URL do video: https://youtu.be/NGprbQhJ2WY
 
-Status: o video de demonstracao ainda nao foi gravado ou publicado.
-Nao foi inserida nenhuma URL ficticia.
+Status: video de demonstracao gravado e publicado em 19/11/2026.
 
-Roteiro para a gravacao real:
+Roteiro da gravacao:
 - Instalacao e configuracao do ambiente.
 - Ingestao e indexacao no ChromaDB.
 - Interface Gradio com resposta e fontes documentais.
@@ -12,6 +11,3 @@ Roteiro para a gravacao real:
 - Recusa de pergunta fora do escopo pelos guardrails.
 - Agente usando ferramentas (Ecopontos e calculadora).
 - Execucao da suite de testes automatizados.
-
-Quando o video existir, substituir [PENDENTE] pela URL real e registrar a
-data da gravacao.

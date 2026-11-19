@@ -24,8 +24,8 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
   inventado.
 - Os oito ground truths foram reescritos e validados por Victor Binot (RM
   571499) em 18/11/2026 e estão marcados como `validado_humanamente`.
-- Nomes, RMs e turma dos três integrantes preenchidos; certificação e vídeo
-  continuam pendentes. A execução local, sem notebook, está justificada abaixo.
+- Nomes, RMs, turma dos três integrantes e link do vídeo preenchidos na
+  certificação. A execução local, sem notebook, está justificada abaixo.
 
 ## Integrantes
 
@@ -102,9 +102,9 @@ como contingência e `0` força CPU.
 GS_2026.02_Ecocidadao/
 ├── base_documental/          # três documentos da base
 ├── avaliacao_ragas.json      # resultado RAGAS real preservado
-├── certificacao.txt          # nomes/RMs/turma preenchidos; certificação pendente
+├── certificacao.txt          # nomes/RMs/turma e link do vídeo preenchidos
 ├── Chat_Log.txt              # interações reais de validação local
-├── demo_video_url.txt        # URL do vídeo pendente
+├── demo_video_url.txt        # URL do vídeo de demonstração
 ├── app.py                      # ponto de entrada da interface
 ├── requirements.txt            # dependências com versões fixadas
 ├── .env.example                # modelo de variáveis de ambiente
@@ -385,15 +385,13 @@ de energia e hardware não foi medido.
 - Duas armadilhas ficaram sem contexto exposto na execução RAGAS.
 - Guardrails heurísticos não substituem revisão humana.
 - Evidências de interface usam contingência local, não o agente Cloud.
-- Certificação e vídeo pendentes.
 
 ## Entregáveis
 
 - `avaliacao_ragas.json` — resultado real preservado.
-- `certificacao.txt` — nomes, RMs e turma (1CCPI) preenchidos; certificação e
-  vídeo pendentes.
+- `certificacao.txt` — nomes, RMs, turma (1CCPI) e link do vídeo preenchidos.
 - `Chat_Log.txt` — interações reais de validação local.
-- `demo_video_url.txt` — URL pendente, sem valor fictício.
+- `demo_video_url.txt` — URL do vídeo de demonstração publicado.
 - `docs/AVALIACAO_RAGAS.md` — análise das métricas.
 - `docs/COMPARACAO_CHUNKING.md` — comparação e decisão.
 - `docs/CONCLUSAO.md` — conclusão curta com números reais.
@@ -419,5 +417,3 @@ seções anteriores deste README.
 3. Corrigir a montagem de contextos do RAGAS para não depender apenas das
    fontes citadas.
 4. Reduzir respostas prolixas e melhorar `answer_relevancy`.
-5. Gravar o vídeo, preencher o link em `demo_video_url.txt` e finalizar a
-   certificação.
