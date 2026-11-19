@@ -1,17 +1,16 @@
-# Validação humana das 8 ground truths
+# Reescrita e validação humana das 8 ground truths
 
 ## Registro da validação
 
-- Revisor: **Victor Binot**
+- Autor da reescrita: **Victor Correia Binot**
 - RM: **571499**
-- Data da conferência: **18/11/2026**
+- Data da reescrita e conferência: **18/11/2026**
 - Formulário respondido: `docs/FORMULARIO_VALIDACAO_GROUND_TRUTHS.md`
-- Resultado: **8 de 8 itens confirmados como OK, sem correções**
+- Resultado: **8 de 8 itens reescritos e confirmados como OK**
 - Status registrado no dataset: `validado_humanamente`
 
-A validação foi feita por leitura direta de cada pergunta e resposta de
-referência de `src/ecocidadao/evaluation/dataset.json` contra os trechos
-correspondentes de `base_documental/`.
+Os textos foram reescritos com palavras próprias e depois conferidos por
+leitura direta contra os trechos correspondentes de `base_documental/`.
 
 ## Escopo da conferência
 
@@ -23,7 +22,9 @@ Foram verificados:
   esperados;
 - tratamento correto dos conflitos temporais do Parque das Acácias.
 
-Nenhuma resposta de referência precisou ser corrigida.
+Os oito textos reescritos foram aplicados em
+`src/ecocidadao/evaluation/dataset.json`. Nenhum fato obrigatório ficou
+faltante após a conferência.
 
 ## Tabela de validação
 
@@ -50,7 +51,8 @@ Nenhuma resposta de referência precisou ser corrigida.
 
 ## Declaração
 
-Declaro que conferi os oito itens contra os documentos de `base_documental/` e
-que as respostas de referência estão corretas para uso na avaliação.
+Declaro que reescrevi os oito itens com palavras próprias e conferi cada um
+contra os documentos de `base_documental/`, e que as respostas de referência
+estão corretas para uso na avaliação.
 
-Victor Binot — RM 571499 — 18/11/2026
+Victor Correia Binot — RM 571499 — 18/11/2026

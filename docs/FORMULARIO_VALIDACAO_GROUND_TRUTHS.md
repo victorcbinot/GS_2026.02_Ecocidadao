@@ -1,14 +1,13 @@
 # Formulário de validação humana dos ground truths
 
-Este formulário serve para agilizar a conferência das oito respostas de
+Este formulário registra a reescrita e a conferência das oito respostas de
 referência de `src/ecocidadao/evaluation/dataset.json` contra os documentos de
 `base_documental/`.
 
 ## Como responder
 
-Para cada item, marque **OK** se a resposta de referência estiver correta ou
-**CORRIGIR** e escreva a correção. Não é necessário reescrever o texto se ele
-estiver correto.
+Para cada item, marque **OK** se a resposta reescrita estiver correta ou
+**CORRIGIR** e escreva a correção.
 
 No final, informe:
 
@@ -16,8 +15,9 @@ No final, informe:
 - RM;
 - data da conferência.
 
-Formulário preenchido por Victor Binot (RM 571499) em 18/11/2026. Os oito
-itens foram conferidos e marcados como OK, sem correções.
+Formulário preenchido por Victor Correia Binot (RM 571499) em 18/11/2026. Os
+oito itens foram reescritos com palavras próprias, conferidos e marcados como
+OK.
 
 ---
 
@@ -26,9 +26,10 @@ itens foram conferidos e marcados como OK, sem correções.
 **Pergunta:** Onde uma pessoa deve descartar medicamentos vencidos e qual é o
 horário de atendimento desse local?
 
-**Ground truth atual:** Medicamentos vencidos não devem ser entregues em
-Ecopontos. Eles devem ser levados à Farmácia Municipal EcoSaúde, na Rua das
-Palmeiras, 77, Centro, que atende de segunda a sexta-feira, das 08:00 às 17:00.
+**Ground truth reescrito:** Medicamentos vencidos não devem ser descartados
+nos Ecopontos. Eles devem ser entregues na Farmácia Municipal EcoSaúde,
+localizada na Rua das Palmeiras, 77, no Centro, de segunda a sexta-feira, das
+08h às 17h.
 
 **Fonte para conferir:** `regulamento_descarte.md`, seção 6.
 
@@ -48,9 +49,9 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Quais materiais são aceitos no Ecoponto Vila Verde e qual é o
 horário de funcionamento?
 
-**Ground truth atual:** O Ecoponto Vila Verde aceita papel, papelão, vidro,
-plástico, metal e óleo de cozinha usado. Funciona de terça a sábado, das 08:00
-às 16:00.
+**Ground truth reescrito:** O Ecoponto Vila Verde recebe papel, papelão,
+vidro, plástico, metal e óleo de cozinha usado. O local funciona de terça-feira
+a sábado, das 08h às 16h.
 
 **Fonte para conferir:** `lista_ecopontos.md`, tabela “Ecopontos em
 funcionamento”.
@@ -69,9 +70,9 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Onde entregar óleo de cozinha usado e qual é o limite máximo por
 entrega?
 
-**Ground truth atual:** O óleo de cozinha usado deve ser entregue
-exclusivamente no Ecoponto Vila Verde, em garrafa PET lacrada, com no máximo 2
-litros por entrega.
+**Ground truth reescrito:** O óleo de cozinha usado deve ser entregue no
+Ecoponto Vila Verde, dentro de uma garrafa PET bem fechada. Cada entrega pode
+ter no máximo 2 litros de óleo.
 
 **Fontes para conferir:** `lista_ecopontos.md`, “Observações importantes”; e
 `regulamento_descarte.md`, seção 5.
@@ -92,9 +93,9 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Onde entregar entulho e resíduos de construção e qual é o limite
 mensal por domicílio?
 
-**Ground truth atual:** Entulho e resíduos de construção devem ser entregues
-somente no Ecoponto Industrial. O limite é de 2 metros cúbicos por mês por
-domicílio.
+**Ground truth reescrito:** O descarte de entulho e resíduos de construção deve
+ser feito exclusivamente no Ecoponto Industrial. O limite permitido é de 2
+metros cúbicos por mês para cada domicílio.
 
 **Fontes para conferir:** `lista_ecopontos.md`, “Observações importantes”; e
 `regulamento_descarte.md`, seção 5.
@@ -116,10 +117,10 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Em 20 de abril de 2026, o Parque das Acácias aceita pilhas e
 baterias? Se não, para onde esse material deve ser levado nessa data?
 
-**Ground truth atual:** Não. O Parque das Acácias está interditado de 15 de
-março de 2026 a 31 de maio de 2026, inclusive, e não recebe nenhum material
-nesse período. Em 20 de abril de 2026, pilhas e baterias devem ser levadas ao
-Ecoponto Industrial.
+**Ground truth reescrito:** Em 20/04/2026, o Ecoponto Parque das Acácias está
+interditado e não recebe nenhum tipo de material. A interdição ocorre de
+15/03/2026 até 31/05/2026, inclusive. Durante esse período, pilhas e baterias
+devem ser entregues no Ecoponto Industrial.
 
 **Fontes para conferir:** `comunicado_interdicao.md`, seções 1 e 2.
 
@@ -140,9 +141,10 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Em 10 de junho de 2026, o Parque das Acácias aceita pilhas e
 baterias? Se não, onde descartá-las?
 
-**Ground truth atual:** Não. A partir de 1º de junho de 2026, o Parque das
-Acácias deixa de aceitar pilhas e baterias. Elas passam a ser recebidas
-exclusivamente no Ecoponto Industrial.
+**Ground truth reescrito:** Em 10/06/2026, o Ecoponto Parque das Acácias já
+está reaberto, mas não recebe pilhas e baterias. Desde 01/06/2026, esses
+materiais são aceitos exclusivamente no Ecoponto Industrial, e essa mudança é
+permanente.
 
 **Fonte para conferir:** `comunicado_interdicao.md`, seção 3.
 
@@ -162,9 +164,10 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Em 20 de abril de 2026, é possível entregar eletrônicos no
 Parque das Acácias? Qual é a alternativa?
 
-**Ground truth atual:** Não. Durante a interdição de 15 de março de 2026 a 31
-de maio de 2026, o Parque das Acácias não recebe nenhum material. Em 20 de
-abril de 2026, eletrônicos devem ser levados ao Ecoponto Industrial.
+**Ground truth reescrito:** Em 20/04/2026, não é possível entregar eletrônicos
+no Ecoponto Parque das Acácias, pois o local está interditado de 15/03/2026 a
+31/05/2026, inclusive, sem receber nenhum material durante esse período. A
+alternativa para o descarte de eletrônicos é o Ecoponto Industrial.
 
 **Fonte para conferir:** `comunicado_interdicao.md`, seções 1 e 2.
 
@@ -184,10 +187,10 @@ Correção, se houver: ______________________________________________________
 **Pergunta:** Qual é o horário de funcionamento do Parque das Acácias em 10 de
 junho de 2026?
 
-**Ground truth atual:** Em 10 de junho de 2026, o Parque das Acácias funciona
-de segunda a sexta-feira, das 08:00 às 17:00, e no sábado, das 08:00 às 12:00.
-Esse horário foi definido a partir de 1º de junho de 2026 e substitui o
-horário anterior de segunda a sábado, das 07:00 às 19:00.
+**Ground truth reescrito:** Em 10/06/2026, o Ecoponto Parque das Acácias
+funciona de segunda a sexta-feira, das 08h às 17h, e aos sábados, das 08h às
+12h. Esse horário começou a valer em 01/06/2026 e substituiu o horário
+anterior, que era de segunda a sábado, das 07h às 19h.
 
 **Fontes para conferir:** `comunicado_interdicao.md`, seção 3; e
 `lista_ecopontos.md`, tabela “Ecopontos em funcionamento”.
@@ -206,14 +209,14 @@ Correção, se houver: ______________________________________________________
 
 ## Registro final
 
-Nome do revisor: Victor Binot
+Nome do autor e revisor: Victor Correia Binot
 
 RM: 571499
 
-Data da conferência: 18/11/2026
+Data da reescrita e conferência: 18/11/2026
 
-Declaro que conferi os oito itens acima contra os documentos de
-`base_documental/` e que as respostas marcadas como **OK** podem ser usadas
-como ground truth na avaliação.
+Declaro que reescrevi os oito itens acima com palavras próprias e conferi
+contra os documentos de `base_documental/`, e que as respostas marcadas como
+**OK** podem ser usadas como ground truth na avaliação.
 
-Assinatura: Victor Binot
+Assinatura: Victor Correia Binot

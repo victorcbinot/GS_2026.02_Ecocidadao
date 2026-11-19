@@ -7,6 +7,10 @@ Os resultados abaixo vêm exclusivamente de `avaliacao_ragas.json`, gerado em
 ou inventado. As tabelas abaixo usam até seis casas decimais; os valores
 originais permanecem no JSON.
 
+A execução foi feita antes da revisão final da redação dos ground truths. As
+métricas correspondem à redação anterior, semanticamente equivalente; os textos
+reescritos e validados estão no `dataset.json` e também registrados no JSON.
+
 Configuração registrada nessa execução:
 
 | Item | Valor |
@@ -95,8 +99,8 @@ Configuração registrada nessa execução:
 - O mesmo modelo local foi gerador e juiz, o que pode introduzir viés de
   autoavaliação. A configuração pretendida separa GPT-OSS 20B (gerador) e
   Qwen 2.5 7B (juiz).
-- Os ground truths foram validados por Victor Binot (RM 571499) em 18/11/2026;
-  o registro está em `docs/REVISAO_GROUND_TRUTHS.md`.
+- Os ground truths foram reescritos e validados por Victor Binot (RM 571499)
+  em 18/11/2026; o registro está em `docs/REVISAO_GROUND_TRUTHS.md`.
 
 ## Melhorias concretas, em ordem de prioridade
 
@@ -127,4 +131,5 @@ prioridade não é trocar o retriever, e sim controlar a geração e corrigir a
 forma como os contextos são registrados para o RAGAS. As métricas de 0,5708
 (faithfulness), 0,1808 (answer relevancy), 0,5208 (context precision) e
 0,9375 (context recall) são reais, mas devem ser lidas com as ressalvas de
-modelo gerador local e ground truths validados por Victor Binot em 18/11/2026.
+modelo gerador local e ground truths reescritos e validados por Victor Binot em
+18/11/2026.

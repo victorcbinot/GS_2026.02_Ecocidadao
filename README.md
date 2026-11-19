@@ -22,8 +22,8 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
   execução reproduzível e as evidências usam o modelo local. Isso está
   identificado em `evidencias/` e `Chat_Log.txt`; nenhum resultado foi
   inventado.
-- Os oito ground truths foram validados por Victor Binot (RM 571499) em
-  18/11/2026 e estão marcados como `validado_humanamente`.
+- Os oito ground truths foram reescritos e validados por Victor Binot (RM
+  571499) em 18/11/2026 e estão marcados como `validado_humanamente`.
 - Nomes, RMs e turma dos três integrantes preenchidos; certificação e vídeo
   continuam pendentes. A execução local, sem notebook, está justificada abaixo.
 
@@ -268,9 +268,9 @@ baseada nos dados de retrieval. Detalhes em `docs/COMPARACAO_CHUNKING.md`.
 ## Avaliação RAGAS
 
 O dataset em `src/ecocidadao/evaluation/dataset.json` tem exatamente oito
-perguntas: quatro simples e quatro de armadilha. A validação humana está em
-`docs/REVISAO_GROUND_TRUTHS.md`; os oito ground truths estão
-`validado_humanamente` desde 18/11/2026.
+perguntas: quatro simples e quatro de armadilha. Os textos foram reescritos
+pelo grupo e a validação humana está em `docs/REVISAO_GROUND_TRUTHS.md`; os
+oito ground truths estão `validado_humanamente` desde 18/11/2026.
 
 Resultados reais preservados em `avaliacao_ragas.json`:
 
@@ -418,7 +418,6 @@ seções anteriores deste README.
 2. Reexecutar o RAGAS separando GPT-OSS 20B (gerador) e Qwen 2.5 7B (juiz).
 3. Corrigir a montagem de contextos do RAGAS para não depender apenas das
    fontes citadas.
-4. Aplicar ao `dataset.json` os ground truths reescritos pelo grupo.
-5. Reduzir respostas prolixas e melhorar `answer_relevancy`.
-6. Gravar o vídeo, preencher o link em `demo_video_url.txt` e finalizar a
+4. Reduzir respostas prolixas e melhorar `answer_relevancy`.
+5. Gravar o vídeo, preencher o link em `demo_video_url.txt` e finalizar a
    certificação.
