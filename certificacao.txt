@@ -6,7 +6,7 @@ Projeto: EcoCidadão
 Frente: B — Descarte e Sustentabilidade
 Disciplina: Prompt and Artificial Intelligence
 Instituição: FIAP
-Turma: [PENDENTE]
+Turma: 1CCPI
 
 2. INTEGRANTES DO GRUPO
 
@@ -22,7 +22,7 @@ RM: 571499
 3. LINKS DA ENTREGA
 
 Repositório GitHub: https://github.com/victorcbinot/GS_2026.02_Ecocidadao
-Vídeo de demonstração: [PENDENTE — vídeo ainda não gravado]
+Vídeo de demonstração: [PENDENTE — link será informado depois da gravação]
 
 4. TELA FINAL DO PROJETO
 
@@ -41,3 +41,8 @@ de créditos para o gpt-oss:20b.
 Declaramos que este material corresponde ao projeto EcoCidadão, desenvolvido
 em grupo para a Global Solution 2026.2, seguindo as orientações da atividade
 acadêmica.
+
+6. AUTORIZAÇÃO PARA AUSENCIA DO NOTEBOOK
+Status: [PENDENTE — print da mensagem do Professor no Teams em
+evidencias/autorizacao_notebook_teams.png]
+Observação: sem essa autorização, há desconto de 2,0 pontos no critério 1.

@@ -22,7 +22,7 @@ de resíduos, materiais aceitos e proibidos e utilização de Ecopontos.
   `qwen2.5:7b` local como contingência. Isso está identificado em
   `evidencias/` e `Chat_Log.txt`; nenhum resultado foi inventado.
 - Os oito ground truths continuam marcados como `pendente_validacao_humana`.
-- Nomes e RMs dos três integrantes preenchidos; certificação, turma/instituição
+- Nomes, RMs e turma dos três integrantes preenchidos; certificação, instituição
   e vídeo continuam pendentes.
 
 ## Integrantes
@@ -377,12 +377,12 @@ de energia e hardware não foi medido.
 - Ground truths pendentes de validação humana.
 - Guardrails heurísticos não substituem revisão humana.
 - Evidências de interface usam contingência local, não o agente Cloud.
-- Certificação, turma/instituição e vídeo pendentes.
+- Certificação, instituição e vídeo pendentes.
 
 ## Entregáveis
 
 - `avaliacao_ragas.json` — resultado real preservado.
-- `certificacao.txt` — nomes e RMs preenchidos; turma, instituição e
+- `certificacao.txt` — nomes, RMs e turma preenchidos; instituição e
   certificação pendentes.
 - `Chat_Log.txt` — interações reais de validação local.
 - `demo_video_url.txt` — URL pendente, sem valor fictício.
@@ -397,6 +397,9 @@ de energia e hardware não foi medido.
 O professor autorizou a execução local e a retirada do `.ipynb`, desde que o
 motivo fosse documentado. Todo o projeto está em módulos `.py`; não há Jupyter,
 Google Colab ou dependências de notebook.
+
+Registro: print da autorização do Professor no Teams em
+`evidencias/autorizacao_notebook_teams.png`.
 
 ## Próximas etapas
 
